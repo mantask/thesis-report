@@ -1,0 +1,75 @@
+\chapter{Introduction}
+
+% Typically 4-7 pages.
+
+\section{Background} % (fold)
+\label{sec:Problem}
+
+% Since you have a goal, there must be some problem that you are trying to solve. Explain this problem. What people in the real world are affected by the problem that concerns you? It is best if your grandmother understands this section.
+
+The world wide web contains a vast amount of information, counting in billions of web pages [WorldWideWebSize.com]. Mostly it is unstructured or semi-structured documents, making it difficult to process the data directly by machines. As a result, sharing and reusing knowledge across applications, enterprises, and communities is hardly possible without human interaction.
+
+Addressing the need to automatically extract and process large volumes of accessible information, machine needs to extract loosely-structured data from web sources and populate databases with well-structured data for further handling. The problem can be seen as information extraction problem for web pages. 
+
+There are many use cases for sharing data between web-based applications with no dedicated integration capabilities. Some examples include extracting product price information from competitor on-line shops, or integrating with an online scheduling application which has no application programming interface (API). In both cases data is presented to the user via the web browser and no special care was taken to make it easy for automatic extraction.
+
+
+\section{Problem}
+
+% Since you have a goal, there must be some problem that you are trying to solve. Explain this problem. What people in the real world are affected by the problem that concerns you? It is best if your grandmother understands this section.
+
+Most of the pages on the web are HTML documents. Many websites use view templates to generate individual pages on the server side. Thus, the pages generated from the same template have similar stucture. HTML has a tree structure and can be viewed as an labeled ordered rooted tree. To extract information from the webpage, one needs to query a node in a tree. The program that performs the actual information extraction (IE) task from webpages is called a web wrapper. The term originates from information system integration domain \cite{Chang:2006:SWI:1159162.1159300}, where a proxy interface abstracts away the complexity of accessing a data source. The web wrapper can be expressed in a number of standartized notations, e.g., XPath, CSS selectors, etc.
+
+For a template based webpage, writing a query that extracts certain pieces of information is a straight forward task. The query can be written in many ways and still target the same node in DOM tree. The problem gets really interesting when you take into consideration that websites are maintained and evolve over time. A slight user interface update might break the wrapper.
+
+\textit{Building the most robust wrapper from all possible wrappers is the subject of this thesis.} Defining wrapper robustness is a problem of its own. Some format definitions will be shown later. Informally, it's the wrapper that has the lowest odds of breaking after any changes to the web page structure.
+
+The problem of building a robust wrapper is relevant in many areas, inluding web application integration, web user interface test automation, and web scrapping.
+
+
+\section{Goal}
+
+% After the motivation (why) explain in detail what the goal is. If your project contains an element of research (which is good) the goal is more like a hypothesis. In other words, your goal is to investigate some particular method to verify its usefulness for some particular purpose (verify the hypothesis).
+
+The goal of this thesis is to design an algorithm for building the most robust wrapper from a single HTML snapshot. Futher more, the algorithm is constrained with the following limitations and assumptions:
+
+\begin{enumerate}
+	\item There is a single base version of the web page, i.e. no training set.
+	\item The wrapper must be robust and return the distinguished node(s) on the future web page versions.
+	\item The wrapper must be reasonably fast (average execution time $<0.5\text{ sec}$).
+\end{enumerate}
+
+Inputs: 
+
+\begin{enumerate}
+	\item Base version of HTML document $\omega_{base}$
+	\item Location of the distinguished node in the base document $d(\omega_{base})$
+	\item New version of HTML document $\omega_{new}$
+\end{enumerate}
+
+Outputs: 
+
+\begin{enumerate}
+	\item New location of the node $d(\omega_{new})$
+	\item Confidence measure $c$
+\end{enumerate}
+
+
+\section{Contribution}
+
+% What methods are used?
+% Briefly references to related research (just the main references – more references in chapter ”Related research” or throughout the thesis)
+% Emphasize your own contribution: what is original or new?
+
+What I managed to do, though, is to narrow down my focus to the tool-for-the-job – a tree edit-distance application. There are three recent papers that build on this idea \cite{DBLP:conf/sigmod/DalviBS09}, \cite{DBLP:journals/pvldb/ParameswaranDGR11}, \cite{DBLP:conf/wism/LiuWYL12}.
+
+While the idea of robust wrappering is not new, the core difference from earlier systems is the unique combination of ideas and tools that are optimized for performance.
+Here the idea of computing edit-distance between two trees (or DOMs) is introduced, robustness is defined formally, and later dynamic algorithm for finding the optimal wrapper is designed. My contribution was to implement the algorithm, optimize the performance using the latest research, and improve the algorithm to support multiple result sets (as opposed to single node from the query).
+
+
+\section{Organization}
+
+The concepts are defined in chapter 2. Next current state of the art is discussed and our focus is narrowed. Next we elaborate on the design and implementation of our method. Afterwards we present the empirical experiment results. The thesis is conluded with a finding discussion and future research direction.
+
+
+% vim: set wrap
