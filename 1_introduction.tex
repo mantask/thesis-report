@@ -68,6 +68,21 @@ Here the idea of computing edit-distance between two trees (or DOMs) is introduc
 
 I would carry out an empirical research and experiment with variations: (1) precompute various minimum cost models, (2) try $O(n)$ heuristics for calculating min diff between two trees vs $O(n^3)$ traditional approach, (3) try different candidate wrapper generation techniques.
 
+Build on the basis of \cite{DBLP:journals/pvldb/ParameswaranDGR11}, implement optimizations and run empirical experiments: (1) think of change probabilities model, (2) optimize for multiple extractions, (3) parallize with functional implementation, (4) analyze for multiple distinguished nodes extraction, (5) identify repeating elements of page + the base and run wrapper in each subtree of the base.
+
+We could compare various XPath enumeration techniques, eg Dalvi'09, vs Probabilistic model Parameswaran'11.
+
+Add visual features and content patterns to the structural model. (Visual features, which are obtained from web browsers API, enhance understanding of semantic similarity between web page elements.) Improve Parameswaran'11 with content models (see wrapper repairs).
+
+For multiple nodes per wrapper on same page, recognize data regions first Zhai and run all the wrapper inducers later. Utilize record-level wrapper induction (Zheng).
+
+According to (Myllymaki \& Jackson, 2002), robustness can be achieved by “relying less on page structure and more on content.” Use more of that. We think that in addition to this, the total number of hops should be minimized because every additional hop increases the risk of failure.
+
+Dalvi'09 on change model learning:
+- same set of tags appear in the top list for insertions and deletions, i.e. a, br tend to be be more volatile.
+- same sets of tags appear in the top of the list. most volatile tags may not depend heavilyt on the data?
+- yet tr,td are more prominent in some websites. also ul, li. depends on how layouts are made.
+
 
 \section{Organization}
 
