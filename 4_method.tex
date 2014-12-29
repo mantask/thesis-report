@@ -1,4 +1,4 @@
-\chapter{Robust web extraction framework adaptation}
+\chapter{Robust record-level web extraction}
 % Describe your own work (how you reached your goal) and take care to motivate your choices. Don't just describe all the things you did – tell us why.
 
 HTML has a tree structure and can be viewed as an ordered labled tree.
@@ -9,9 +9,46 @@ Specify your topic carefully. Don’t take too large topic!  Invent a preliminar
 
 You can write the thesis after you have read all material or made all experiments. However, you can begin to write some parts already when you are working. Often you have to change your design plan, but it is just life! Ask feedback from your supervisor, when your work proceeds.
 
-\chapter{Optimization 1: Multiple extractions}
-\chapter{Optimization 2: Parallelization}
-\chapter{Optimization 3: Multiple distinguished nodes}
-\chapter{Optimization 4: Repeating elements}
+\IncMargin{2em}
+\begin{algorithm}
+	\KwData{$w, w', d(w)$}
+	\KwResult{$\{v'_i\}$}
+	\DontPrintSemicolon
+	\SetKwFunction{RegionBoundary}{RegionBoundary}
+	\SetKwFunction{ProbWrapper}{ProbWrapper}
+	\SetKwFunction{RecordRegions}{RecordRegions}
+	\BlankLine
+
+	$v_{boundary}$ $\leftarrow$ \RegionBoundary{$w, d(w)$}\;
+	$\phi_{boundary}$ $\leftarrow$ \ProbWrapper{$w, v_{boundary}$}\;
+	$\{r_{i}\}$ $\leftarrow$ \RecordRegions{$w, v_{boundary}$}\;
+	$\phi_{region}$ $\leftarrow$ \ProbWrapper{$r_1, d(w)$}\;
+	$\{r'_{i}\}$ $\leftarrow$ \RecordRegions{$w', \phi_{boundary}(w')$}\;
+	return $\{ \phi_{region}(r'_i) \}$
+
+	\caption{Find record vertexes}
+\end{algorithm}
+\DecMargin{2em}
+
+\IncMargin{2em}
+\begin{algorithm}
+	\KwData{$w, v$}
+	\KwResult{$v_{boundary}$}
+	\DontPrintSemicolon
+	\SetKwFunction{RecordRegions}{RecordRegions}
+	\BlankLine
+
+	\For{$v_i \in siblings(v)$}{
+		ref [Liu'03]
+	}
+
+	\caption{Finding region boundary}
+\end{algorithm}
+\DecMargin{2em}
+
+\chapter{Data region mining}
+\chapter{Probabilistic wrapper induction}
+\chapter{Partial tree alignment}
+\chapter{Content models}
 
 % vim: set wrap
