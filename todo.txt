@@ -1,0 +1,16 @@
+go through each paper and extract a paragraph – 1d
+describe the core algorithm – 1d
+	motivation, 
+	outline, 
+	visual example
+describe design decisions – 1d
+	motivation
+	data structures
+	algorithms
+	trade-offs
+rewrite main concepts sections – 1 d
+Testing (JAN 5)
+	finalize implementation 
+	run experiment
+	write the results
+write conclusions – 1d
