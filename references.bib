@@ -58,20 +58,6 @@
 	keywords = {content extraction, evaluation, robustness, wrappers},
 } 
 
-@inproceedings{DBLP:conf/sigmod/DalviBS09,
-  author    = {Nilesh N. Dalvi and
-               Philip Bohannon and
-               Fei Sha},
-  title     = {Robust web extraction: an approach based on a probabilistic
-               tree-edit model},
-  booktitle = {SIGMOD Conference},
-  year      = {2009},
-  pages     = {335-348},
-  ee        = {http://doi.acm.org/10.1145/1559845.1559882},
-  crossref  = {DBLP:conf/sigmod/2009},
-  bibsource = {DBLP, http://dblp.uni-trier.de}
-}
-
 @article{DBLP:journals/pvldb/ParameswaranDGR11,
   author    = {Aditya G. Parameswaran and
                Nilesh N. Dalvi and
@@ -239,13 +225,40 @@
 }
 
 
-
-% examples
-
-@webpage{TuringAward07,
-   title         = {ACM Turing Award Honors Founders of Automatic Verification Technology},
-   url           = {http://www.acm.org/press-room/news-releases-2008/turing-award-07},
-   author        = {The Association for Computing Machinery},
-   lastchecked   = {27-09-2010}
+@article{shasha1990a,
+  title = {FAST ALGORITHMS FOR THE UNIT COST EDITING DISTANCE BETWEEN TREES},
+  language = {English},
+  publisher = {ACADEMIC PRESS INC JNL-COMP SUBSCRIPTIONS},
+  author = {Shasha, D. and Zhang, KZ},
+  journal = {JOURNAL OF ALGORITHMS},
+  volume = {11},
+  number = {4},
+  pages = {581-621},
+  year = {1990},
+  issn = {01966774, 10902678},
+  abstract = {Ordered labeled trees are trees whose nodes are labeled and in which the left-to-right order among siblings is significant. Given two different trees, a natural question to ask is how similar or different they are. The authors consider the distance between two trees to be the minimum number of edit operations, (insert, delete, and modify) necessary to transform one tree to another. They present three algorithms to find the distance. The first algorithm is a simple dynamic programming algorithm based on a postorder traversal whose complexity improves upon the best previously published algorithm due to Tai (1979). The second and third algorithms are optimal speedup parallel algorithms based on the applications of suffix trees to the comparison problem. The cost of executing these algorithms is a monotonic increasing function of the distance between the two trees.},
+  doi = {10.1006/jagm.1993.1036}
 }
 
+@article{de2004a,
+  title = {Automatic web news extraction using tree edit distance},
+  language = {eng},
+  author = {De Reis, Davi Castro and Golgher, Paulo B. and Da Silva, Altigran S. and Laender, Alberto H F},
+  journal = {Thirteenth International World Wide Web Conference Proceedings, Www2004, Thirteenth Int. World Wide Web Conf. Proc. Www},
+  pages = {502-511},
+  year = {2004},
+  isbn = {158113844x},
+  abstract = {The Web poses itself as the largest data repository ever available in the history of humankind. Major efforts have been made in order to provide efficient access to relevant information within this huge repository of data. Although several techniques have been developed to the problem of Web data extraction, their use is still not spread, mostly because of the need for high human intervention and the low quality of the extraction results. In this paper, we present a domain-oriented approach to Web data extraction and discuss its application to automatically extracting news from Web sites. Our approach is based on a highly efficient tree structure analysis that produces very effective results. We have tested our approach with several important Brazilian on-line news sites and achieved very precise results, correctly extracting 87.71% of the news in a set of 4088 pages distributed among 35 different sites.}
+}
+
+@article{dalvi2009a,
+  title = {Robust web extraction: An approach based on a probabilistic tree-edit model},
+  publisher = {Association for Computing Machinery},
+  author = {Dalvi, Nilesh and Bohannon, Philip and Sha, Fei},
+  journal = {SIGMOD-PODS'09 - Proceedings of the International Conference on Management of Data and 28th Symposium on Principles of Database Systems},
+  pages = {335-347},
+  year = {2009},
+  isbn = {9781605585543},
+  abstract = {On script-generated web sites, many documents share com- mon HTML tree structure, allowing wrappers to effectively extract information of interest. Of course, the scripts and thus the tree structure evolve over time, causing wrappers to break repeatedly, and resulting in a high cost of maintaining wrappers. In this paper, we explore a novel approach: we use temporal snapshots of web pages to develop a tree-edit model of HTML, and use this model to improve wrapper construction. We view the changes to the tree structure as suppositions of a series of edit operations: deleting nodes, inserting nodes and substituting labels of nodes. The tree structures evolve by choosing these edit operations stochas- tically. Our model is attractive in that the probability that a source tree has evolved into a target tree can be estimated efficiently-in quadratic time in the size of the trees-making it a potentially useful tool for a variety of tree-evolution problems. We give an algorithm to learn the probabilistic model from training examples consisting of pairs of trees, and apply this algorithm to collections of web-page snap- shots to derive HTML-specific tree edit models. Finally, we describe a novel wrapper-construction framework that takes the tree-edit model into account, and compare the quality of resulting wrappers to that of traditional wrappers on syn- thetic and real HTML document examples. © 2009 ACM.},
+  doi = {10.1145/1559845.1559882}
+}
