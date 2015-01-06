@@ -31,14 +31,14 @@ For a webpage, writing a query that extracts a certain piece of information is a
 % Data records
 In this paper, we focus on web pages that contain a list of similar items, e.g. a list of products. These \emph{data records} are displayed in a web page with regular structural pattern. Figure~\ref{fig:amazon-books-html} provides an example, a part of the web page that lists four books. The full description of each book is a data record. The actual HTML tag tree for the page in Figure~\ref{fig:amazon-books-html} is given in Figure~\ref{fig:amazon-books-tree}.
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=1.0\textwidth]{figures/amazon-books}
 	\caption{An example of four data records.}
 	\label{fig:amazon-books-html}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\Tree [.table 
 			[.thead 
@@ -59,7 +59,7 @@ In this paper, we focus on web pages that contain a list of similar items, e.g. 
 	\label{fig:amazon-books-tree}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
     \begin{tabularx}{\textwidth}{ | l | l | l | l | l | l | p{5cm} |}
 		\hline
@@ -87,11 +87,10 @@ The problem of building a robust wrapper is relevant in many areas, inluding web
 
 
 % ------------------------------------------------------------
-\section{Goal}
+\section{Objectives}
 
 % After the motivation (why) explain in detail what the goal is. If your project contains an element of research (which is good) the goal is more like a hypothesis. In other words, your goal is to investigate some particular method to verify its usefulness for some particular purpose (verify the hypothesis).
-
-The goal of this thesis is to design and test an algorithm for building a robust and fast record-level wrapper from a single annotated HTML \emph{snapshot}, i.e. a specific document version at a given time. Futhermore, the algorithm is constrained with the following limitations and assumptions:
+The goal of this thesis is to design and test an algorithm for fast and robust record-level wrapping of (future) web pages, having only a single annotated HTML \emph{snapshot}, i.e. a specific document version at a given time. Futhermore, the algorithm is constrained with the following limitations and assumptions:
 
 \begin{enumerate}
 	\item There is a single annotated snapshot of a web page, i.e. training set of one.
@@ -99,65 +98,16 @@ The goal of this thesis is to design and test an algorithm for building a robust
 	\item The wrapper must be reasonably fast on commodity hardware.
 \end{enumerate}
 
-Inputs: 
+% TODO I suggest that you take a little concrete example and explain your method in terms of that, so that the reader can see the input HTML tree, what you use each of the three methods for, and what you get as result.
 
-\begin{enumerate}
-	\item $w_{base}$ -- An initial snapshot of annotated HTML document.
-	\item $d(w_{base})$ -- A location of a single record attribute node in the annotated document.
-	\item $w_{new}$ -- New (possibly updated) snapshot of the same HTML document.
-\end{enumerate}
+The Figure~\ref{fig:record-level-wrapping} illustrates and example of annotated initial snapshot of the document. The user marks the position of data attribute at any record (see left-hand side). Subsequently, a new snapshot of the same but page is given. The location of picture and description in each record has changed. The algorithm locates six data records in the new page and exact positions of the same data attribute in each record (see right-hand side).
 
-Outputs: 
-
-\begin{enumerate}
-	\item $\{a'_i\}$ -- Extracted attribute values of data records in a new document, e.g. book titles.
-	\item $c$ -- \emph{Confidence} measure, i.e. the probability measure that the wrapper did not break. This shows how accurate was the extraction.
-\end{enumerate}
-
-The following example illustrates sample inputs and outputs. An initial snapshot $w_{base}$ of a sample HTML document is illustrated in Figure~\ref{fig:sample-tree}. The annotated attribute node $d(w_{base})$ is marked with parenthesis. The extracted record attribute values are $\{\text{Carol}, \text{Bob}, \text{Alice}\}$ with $90\%$ confidence.
-
-\begin{figure}
+\begin{figure}[h]
 	\centering
-	\Tree [.table 
-			[.thead 
-				[.tr 
-					[.th [.\textit{Name} ] ]
-					[.th [.\textit{Age} ] ]
-				]
-			]              
-			[.tbody 
-				[.tr 
-					[.td [.\textit{(Carol)} ] ]
-					[.td [.\textit{18} ] ]
-				]
-				[.tr 
-					[.td [.\textit{Bob} ] ]
-					[.td [.\textit{19} ] ]
-				]
-				[.tr 
-					[.td [.\textit{Alice} ] ]
-					[.td [.\textit{20} ] ]
-				]
-			]
-		]
-	\Tree [.table 
-			[.tr 
-				[.td [.\textit{(Carol)} ] ]
-				[.td [.\textit{18} ] ]
-			]
-			[.tr 
-				[.td [.\textit{(Bob)} ] ]
-				[.td [.\textit{19} ] ]
-			]
-			[.tr 
-				[.td [.\textit{(Alice)} ] ]
-				[.td [.\textit{20} ] ]
-			]
-		]
-	\caption{An initial $w_{base}$ (on the left) and a transformed $w_{new}$ (on the right) snapshots of a sample HTML document. Distinguished nodes marked in paranthesis.}
-	\label{fig:sample-tree}
+	\includegraphics[width=1\linewidth]{figures/record-level-wrapping}
+	\caption{Record-level wrapping example.}
+	\label{fig:record-level-wrapping}
 \end{figure}
-
 
 
 % ------------------------------------------------------------
@@ -167,65 +117,29 @@ The following example illustrates sample inputs and outputs. An initial snapshot
 % Briefly references to related research (just the main references – more references in chapter ”Related research” or throughout the thesis)
 % Emphasize your own contribution: what is original or new?
 
+% 2. What can other methods do?
+Current approaches suffer from a number of problems. First, many wrapping techniques lack formal definition of robustness and are based on a number of heuristics [TODO refs]. Other techniques require large training sets[TODO refs]. Most of the methods are based on enumeration and are slow [TODO refs]. Finally, some wrappers assume single data record per page. While there are solutions addressing individual problems, there is no coherent framework for fast and robust future record-level wrapping given single annotated snapshot of an HTML document.
+
 % 1. Why did you choose to combine these three methods? Are there alternatives?
-
-Current approachs suffer from ... problems. First, ... There is no coherent framework for ...
-
 In this paper, we present a new method for fast and robust record-level data extraction. The method builds on three lines of work and combines them in a novel way: \emph{data region mining} \cite{liu2009a} to recognize template generated areas on a web page, \emph{probabilistic wrapper induction} \cite{DBLP:journals/pvldb/ParameswaranDGR11} to extract data from a single data region in a robust way, and \emph{partial tree alignment} \cite{zhai2005a} to repeatedly extract data from multiple regions. 
+
+% 3. Why do you think that your method will be better? (This is in fact the thesis of your thesis.) You should elaborate a bit on each of these points. That is, relate your approach to the state-of-the-art and argue for your choice.
+Data records on the web and probabilistic change models for trees have not been combined before into a coherent system. We demonstrate that our method is both accurate and fast. (TODO more about the experiment setup and findings later) We also show that chosen techniques can be optimized / fine-tuned for specific use-case to get better performance and accuracy.
 
 % TODO
 We have implemented the method in Java and used the implementation to evaluate and fine tune the method. The evaluation shows that ... achieves higher accuracy, precision and robustness than the alternatives approaches...
 
 % TODO
-The contribution can be summed up: \\
-- a novel algorithm for robust record-level scrapping using single annotated page as a training set;\\
-- a full implementation in Java, parametrized ... (available at http://bitbucket.org)\\
-- an experimental evaluation and comparison of different algorithm variations based onabout 11'000 HTML pages taken from 17 web sites over a preiod of more than a year\\
-
-% 2. What can other methods do?
-
-% How each method work. How they are combined.
-The main idea of the new method is to split wrapping process into two steps. First, we match the data region boundary. Next, we operate inside the boundary per each data record. We use a minimal tree-edit distance and a probabilistic HTML change model as primary tools for both steps. Eventually, we build a partial tree which is later used for attribute value extraction from multiple data regions. **And pattern matching is used for content double checking.** ???
-
-% Probabilistic wrapper induction
-% TODO Why? Alternatives? 
-\cite{DBLP:journals/pvldb/ParameswaranDGR11} introduces the idea of computing edit-distance between two trees, formally defines robustness, and later designs a dynamic programming algorithm for finding the optimal wrapper. Most alternative wrapping techniques [TODO: refs] require large training sets, or use no formal definition of robustness. Yet the method is limited to extracting a single distinguished node from a tree. Thus, we consider it as a state of the art method.
-
-% Data record mining
-% TODO Why? Alternatives? 
-To enable wrapping in a web page with multiple data records, we need to locate individual data record regions and run page-level wrapper inside a single region. Thus we choose \cite{liu2009a} proposed technique for mining data regions. Unlike most alternatives [TODO: refs] this method ... We also experimented with method variations by implementing tree-edit distance instead of original string edit-distance. And also other optimiztions for our particular use-case.
-String matching vs Probabilistic tree change model, which is more accurate
-
-% Broom extraction
-% TODO Why? Alternatives? 
-
-% 3. Why do you think that your method will be better? (This is in fact the thesis of your thesis.) You should elaborate a bit on each of these points. That is, relate your approach to the state-of-the-art and argue for your choice.
-
-Data records on the web and probabilistic change models for trees have not been combined before into a coherent system. We demonstrate that our method is both accurate and fast. (more about the experiment setup and findings later) We also show that chosen techniques can be optimized / fine-tuned for specific use-case to get better performance and accuracy.
-
-% TODO I suggest that you take a little concrete example and explain your method in terms of that, so that the reader can see the input HTML tree, what you use each of the three methods for, and what you get as result.
-
-
-\subsection{Example: method in action}
-
-The new method is best illustrated by an example. [TODO]
-
-A wrapper is built from original snapshot:
+The contribution can be summed up:
 
 \begin{enumerate}
-	\item A global wrapper is built to locate a distinguished node.
-	\item Data regions on the original page are located.
-	\item A broom is extracted from all regions.
-	\item A local wrapper is built for single region.
+	\item a novel algorithm for robust record-level wrapping using single annotated page as a training set;
+	\item a full implementation in Java, parametrized ... (available at \url{https://bitbucket.org/mantiniss/thesis-wrapper});
+	\item an experimental evaluation and comparison of different algorithm variations based on about XXX HTML pages taken from YY web sites over a period of more than a ZZZ 
 \end{enumerate}
 
-Wrapping process on the new snapshot:
+% TODO Why? Alternatives? 
 
-\begin{enumerate}
-	\item A candidate node is located in a new page with a global wrapper.
-	\item Data regions on the original page are located.
-	\item A local wrapper is run through each data region to extract data records.
-\end{enumerate}
 
 
 % What I managed to do, though, is to narrow down my focus to the tool-for-the-job – a tree edit-distance application. There are three recent papers that build on this idea \cite{DBLP:conf/sigmod/DalviBS09}, \cite{DBLP:journals/pvldb/ParameswaranDGR11}, \cite{DBLP:conf/wism/LiuWYL12}.

@@ -1,16 +1,16 @@
-\chapter{Main concepts}
+\chapter{Main Concepts}
 
 % Describe your own work (how you reached your goal) and take care to motivate your choices. Don't just describe all the things you did – tell us why.
 % Background theory and main concepts
 
-\section{Labeled ordered rooted tree}
+\section{Labeled Ordered Rooted Tree}
 
 Ordered labeled trees are trees in which hte left-to-right orer among siblings is significant \cite{shasha1990a}.
 
 An HTML document is a hierarchical tree structure with a defined order, i.e. depth-first pre-order traversal. It has a single root node (<HTML> element) and contains nodes from a finite set of elements: <P>, <DIV>, <H1>, <STRONG>, etc. Each element type has semantic associated with it.
 
 % TODO rewrite from [PARAMESWARAN'11]
-Ordered Labeled Trees : Let w be a webpage. We represent w as an ordered, labeled tree corresponding to the parsed HTML DOM tree of the webpage. As an example, consider Figure 1, represent- ing the HTML of an IMDB page. The children of every node areordered, (e.g., in Figure 1, the node corresponding to head is or- dered before the node corresponding to body among the children of the root) and every node has a label from a set of labels L (e.g., the root has a label html ). The label of a node essentially indicates the type of the node.
+[TODO] Ordered Labeled Trees : Let w be a webpage. We represent w as an ordered, labeled tree corresponding to the parsed HTML DOM tree of the webpage. As an example, consider Figure 1, represent- ing the HTML of an IMDB page. The children of every node areordered, (e.g., in Figure 1, the node corresponding to head is or- dered before the node corresponding to body among the children of the root) and every node has a label from a set of labels L (e.g., the root has a label html ). The label of a node essentially indicates the type of the node.
 
 In addition, the nodes at the leaves are text nodes (depicted in Figure 1 as text in gray). For instance, the first leaf has textual content “ Title ”. Since we are primarily interested in structural changes, for our algorithms we replace all HTML text nodes with nodes having special label “ TEXT ”. (In Appendix B.4.1, we de- scribe some extensions that we use to leverage the textual content information in addition to structure.)
 
@@ -27,7 +27,7 @@ http://www.w3.org/TR/dom/\#element
 
 \section{XML}
 
-W3Org notations: DOM, XML, XPath, XSLT ,etc. ref \cite{Myllymaki02robustweb}.
+[TODO] W3Org notations: DOM, XML, XPath, XSLT ,etc. ref \cite{Myllymaki02robustweb}.
 
 % http://en.wikipedia.org/wiki/XML
 Extensible Markup Language (XML) is a markup language that defines a set of rules for encoding documents in a format which is both human-readable and machine-readable. It is defined by the W3C's XML 1.0 Specification[2] and by several other related specifications,[3] all of which are free open standards.[4]
@@ -42,12 +42,19 @@ XPath defines a syntax named XPath expressions which identifies one or more of t
 XSLT is a language with an XML-based syntax that is used to transform XML documents into other XML documents, HTML, or other, unstructured formats such as plain text or RTF. XSLT is very tightly coupled with XPath, which it uses to address components of the input XML document, mainly elements and attributes.
 
 
-\section{Data records}
+\section{Data Records}
 
 % TODO [ZHAI'05]
-The MDR algorithm is based on two observations about data
+[TODO] The MDR algorithm is based on two observations about data
 records in a Web page and an edit distance string matching
 algorithm [2] to find data records. The two observations are:
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\linewidth]{figures/method}
+	\caption{Inputs / outputs of the wrapper}
+	\label{fig:method}
+\end{figure}
 
 1. A group of data records that contains descriptions of a set of
 similar objects are typically presented in a contiguous region
@@ -89,13 +96,11 @@ means do we assume that a Web page has only one data region
 that contains data records. In fact, a Web page may contain a few
 data regions. Different regions may have different data records.
 
----
-
-\section{Edit tree distance}
+\section{Edit Tree Distance}
 
 % TODO rewrite [Zhai'05]
 
-Similar to string edit distance, tree edit distance [31, 30] between
+[TODO] Similar to string edit distance, tree edit distance [31, 30] between
 two trees A and B (we are only interested in labeled ordered
 rooted trees) is the cost associated with the minimum set of
 operations needed to transform A into B. In the classic
@@ -133,7 +138,7 @@ with similar complexities.
 
 % TODO [PARAMESWARAN'11]
 
-Edit Operations : We are interested in modeling the scenario when
+[TODO] Edit Operations : We are interested in modeling the scenario when
 the webpages undergo structural changes. Each change is one of
 three edit operations: insertion of a node (i.e., insert a node x as a
 child of another node y, and assign some subsequence of y’s chil-
@@ -181,7 +186,7 @@ The term originates from information system integration domain \cite{Chang:2006:
 
 % TODO [PARAMESWARAN'11]
 
-Page-level Wrapper Robustness : The problem is formally de-
+[TODO] Page-level Wrapper Robustness : The problem is formally de-
 fined in Section 2, and is the focus of this paper. We are given a
 page w along with the locations of the labeled nodes, and we want
 to extract the information from a future version of w. We consider
