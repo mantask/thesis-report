@@ -1,4 +1,5 @@
 \chapter{Introduction}
+\label{ch:intro}
 
 % Typically 4-7 pages.
 
@@ -41,18 +42,26 @@ In this paper, we focus on web pages that contain a list of similar items, e.g. 
 \begin{figure}[h]
 	\centering
 	\Tree [.table 
-			[.thead 
-				[.tr 
-					[.th [.\textit{Vorname} ] ]
-					[.th [.\textit{Nachname} ] ]
-				]
-			]              
-			[.tbody 
-				[.tr 
-					[.td [.\textit{Donald} ] ]
-					[.td [.\textit{Duck} ] ]
+			[.tr 
+				[.td [.img ] ]
+				[.td [.img ] ]
+				[.td [.img ] ]
+				[.td [.img ] ]
+			]
+			[.tr 
+				[.td 
+					[.a
+						[.\textit{How to Build...} ]
+					]
+					[.a
+						[.\textit{George...} ]
+					]
+					[.span 
+						[.\textit{Hardcover} ]
+					]
 					[. ... ]
 				]
+				[. ... ]
 			]
 		]
 	\caption{Tag tree of the page in Figure~\ref{fig:amazon-books-html}}
@@ -63,15 +72,15 @@ In this paper, we focus on web pages that contain a list of similar items, e.g. 
 	\centering
     \begin{tabularx}{\textwidth}{ | l | l | l | l | l | l | p{5cm} |}
 		\hline
-		\textbf{Title} & \textbf{Author} & \textbf{Cover} & \textbf{Comments} & \textbf{Old price} & \textbf{New price} \\ 
+		\textbf{Title} & \textbf{Author} \\ 
 		\hline
-		How to Build a Billion Dollar App ... & George Berkowski & Paperback & 62 & 13.99 & 9.79 \\ 
+		How to Build a Billion Dollar App ... & George Berkowski \\ 
 		\hline
-		The Hard Thing About Hard Things ... & Ben Horowitz & Hardcover & 39 & 18.99 & 12.91 \\ 
+		The Hard Thing About Hard Things ... & Ben Horowitz \\ 
 		\hline
-		The Google Story & David A. Vise, Mark Malseed & Paperback & 23 & 9.99 & 7.19 \\ 
+		The Google Story & David A. Vise, Mark Malseed \\ 
 		\hline
-		In The Plex: How Google Thinks, Works ... & Steven Levy & Hardcover & 16 & 18.99 & 15.19 \\ 
+		In The Plex: How Google Thinks, Works ... & Steven Levy \\ 
 		\hline
     \end{tabularx}
 \end{figure}
@@ -118,13 +127,13 @@ The Figure~\ref{fig:record-level-wrapping} illustrates and example of annotated 
 % Emphasize your own contribution: what is original or new?
 
 % 2. What can other methods do?
-Current approaches suffer from a number of problems. First, many wrapping techniques lack formal definition of robustness and are based on a number of heuristics [TODO refs]. Other techniques require large training sets[TODO refs]. Most of the methods are based on enumeration and are slow [TODO refs]. Finally, some wrappers assume single data record per page. While there are solutions addressing individual problems, there is no coherent framework for fast and robust future record-level wrapping given single annotated snapshot of an HTML document.
+Current approaches suffer from a number of problems. First, many wrapping techniques lack formal definition of robustness and are based on a number of heuristics [TODO refs]. Other techniques require large training sets[TODO refs]. Most of the methods are based on enumeration and are slow [TODO refs]. Finally, some wrappers assume single data record per page. While there are solutions addressing individual steps, there is no coherent framework for fast and robust future record-level wrapping given single annotated snapshot of an HTML document.
 
 % 1. Why did you choose to combine these three methods? Are there alternatives?
-In this paper, we present a new method for fast and robust record-level data extraction. The method builds on three lines of work and combines them in a novel way: \emph{data region mining} \cite{liu2009a} to recognize template generated areas on a web page, \emph{probabilistic wrapper induction} \cite{DBLP:journals/pvldb/ParameswaranDGR11} to extract data from a single data region in a robust way, and \emph{partial tree alignment} \cite{zhai2005a} to repeatedly extract data from multiple regions. 
+In this paper, we present a new method for fast and robust record-level data extraction. The method builds on three lines of work and combines them in a novel way: \emph{data region mining} \cite{liu2009a} to recognize template generated areas on a web page, \emph{probabilistic wrapper induction} \cite{DBLP:journals/pvldb/ParameswaranDGR11} to extract data from a single data record in a robust way, and \emph{partial tree alignment} \cite{zhai2005a} to repeatedly extract data from multiple records. 
 
 % 3. Why do you think that your method will be better? (This is in fact the thesis of your thesis.) You should elaborate a bit on each of these points. That is, relate your approach to the state-of-the-art and argue for your choice.
-Data records on the web and probabilistic change models for trees have not been combined before into a coherent system. We demonstrate that our method is both accurate and fast. (TODO more about the experiment setup and findings later) We also show that chosen techniques can be optimized / fine-tuned for specific use-case to get better performance and accuracy.
+Data records on the web and probabilistic change models for trees have not been combined before into a coherent system. We demonstrate that our method is both fast and accurate. (TODO more about the experiment setup and findings later) We also show that chosen techniques can be optimized / fine-tuned for specific use-case to get better performance and accuracy.
 
 % TODO
 We have implemented the method in Java and used the implementation to evaluate and fine tune the method. The evaluation shows that ... achieves higher accuracy, precision and robustness than the alternatives approaches...
@@ -172,4 +181,4 @@ The contribution can be summed up:
 We define the main concepts of the problem domain in Chapter 2. In Chapter 3 we discuss current state of the art across relevant lines of research. Chapters 4-8 describe our method in detail and elaborate on the design decisions. We present the empirical experiment results in Chapter 9. The thesis is conluded with findings discussion and future research direction.
 
 
-% vim: set wrap
+% vim:wrap linebreak nolist:
