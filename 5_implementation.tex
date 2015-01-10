@@ -97,6 +97,7 @@ The class also provides a random process \texttt{transform()}, that makes one pa
 \section{Probabilistic Wrappers}
 
 % requirements, alternatives, choices
+The core data wrapping functionality is provided in this package. The wrappers are first initialized with initial tree and can be used to wrap transformed trees multiple times.
 
 % class diagram
 \begin{figure}[h]
@@ -107,12 +108,13 @@ The class also provides a random process \texttt{transform()}, that makes one pa
 \end{figure}
 
 % entities
+The class \texttt{ProbabilisticPageLevelWrapper} finds the single most probable candidate node in a transformed tree and the class \texttt{ProbabilisticRecordLevelWrapper} performs the same action for multiple data records.
 
 % behaviour for each entity
 
-\paragraph{ProbabilisticPageLevelWrapper}
+\paragraph{ProbabilisticPageLevelWrapper} The class \texttt{ProbabilisticPageLevelWrapper} initializes with an initial tree, distinguished node and a change model. Later it can wrap multple transformed trees. The method \texttt{wrap()} iterations through candidate nodes and returns the most probable one. It's a direct implementation of Algorithm~\ref{alg:optimal-probabilistic-wrapper}.
 
-\paragraph{ProbabilisticRecordLevelWrapper}
+\paragraph{ProbabilisticRecordLevelWrapper} The class \texttt{ProbabilisticRecordLevelWrapper} implements the Algorithm~\ref{alg:prob-record-level-wrapper}. As \texttt{ProbabilisticPageLevelWrapper}, this class is first initialized with initial tree and a distinguished node, and later can wrap transformed trees multiple times. 
 
 
 % ----------------------------
