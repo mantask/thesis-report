@@ -54,7 +54,7 @@ Next, we operate inside the boundary of each record in the transformed page and 
 
 
 
-% ----------------
+% ----------------------
 \section{Core Algorithm}
 
 % TODO inputs, outpus, introduce notation and definitions
@@ -310,27 +310,50 @@ Outputs:
 \IncMargin{2em}
 \begin{algorithm}
 
-	\SetKwFunction{RecordRegions}{RecordRegions}
+	\SetKwFunction{TP}{TP}
 	\DontPrintSemicolon
 
-	\KwData{$w, v$}
-	\KwResult{$v_{boundary}$}
+	\KwData{$w, w', u$}
+	\KwResult{$c$}
 	\BlankLine
 
-	\For{$v_i \in siblings(v)$}{
-		ref [Liu'03]
+	\ForEach{$v \in w$}{
+		$p_{1v}$ = \TP($P_1$, $P'_1$) \;
+		$p_{2v}$ = \TP($P_2$, $P'_2$) \;
 	}
 
-	\caption{Finding region boundary}
+	\ForEach{$t \subset w'$}{
+		$p_{2v}$ = \TP($P_2$, $t$) \;
+	}
+
+	\ForEach{$v \in w'$}{
+		\ForEach{$z \in P_2$}{
+			$p_{2z}$ = \TP($P_{2v1z}$, $P'_{2v}$) \;
+		}
+		$p_{3v}$ = \TP($P_2$, $P'_2$) \;
+		$Pr(v)$ = $p_{1v} \times p_{2v} \times p_{3v}$ \;
+	}
+
+	\Return $\operatorname*{arg\,max}_{v \in w} Pr(v)$ \;
+
+	\caption{Optimal probabilistic wrapper.}
+	\label{alg:optimal-probabilistic-wrapper}
 
 \end{algorithm}
 \DecMargin{2em}
 
+In the description of Algorithm~\ref{alg:optimal-probabilistic-wrapper}, we use notation $T_v$ to note the tree under the node $v$, $P_1v$ to note all nodes in the tree that are to its left from node $v$ or to the left of its ancestors in some tree $w$, and $P_2$ to note the tree $w - T_v - P_1$.
+
 % step-by-step
+In the Algorithm~\ref{alg:optimal-probabilistic-wrapper}, the core function is $TP$, which calculates the probability of transforming one tree to another \cite{dalvi2009a}. It uses change model and tree-edit cost calculcations to perform the task. Lines 1-4 precalculcates probabilities of transforming prefix trees for all nodes. Lines 5-7 also precalcultes probabilities, but for transforming $P_2$ to complete subtrees in $w'$. Lines 9-11 precalcultes probabilities of prefix of $z$ in tree $P_2$ to tree $P'_2$. Final probability of transforming $P_2$ to $P'_2$ is calculated by Line 12. All of precalculated probabilities are multiplied in Line 13 to calculate the probability of $u$ being mapped to $v$. Finally, Line 15 returns the node $v$ with the highest probability.
 
 % rewrite in own words
+[TODO Talk about TP and its importance.]
+TP calculates the probability of transforming a forest $f_1$ into a forest $f_2$, given insertion, deletion and substitution operations and their probabilities, i.e. change model. Implements function $DP_1(F_s, F_t)$, which calculates prob that $P_{\theta}(T|S)$, i.e. that $\pi(F_s) = F_t$.
 
-% Other params and optimizations
+$$DP_1(F_s, F_t) = DP_2(F_s, F_t) + P_{ins}(v) \times DP_1(F_s, F_t - v)$$
+
+
 
 % Complexity analysis O(N)
 
