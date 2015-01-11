@@ -121,6 +121,7 @@ The class \texttt{ProbabilisticPageLevelWrapper} finds the single most probable 
 \section{HTML Document Parser}
 
 % requirements, alternatives, choices
+Our wrapper uses internal tree data structures. In order for the implementation to be used as a component in other projects, we provide an HTML adapter (see Figure~\ref{fig:package-html}). This adapter converts HTML document string into our tree data structure and loads probabilistic change model from an external file.
 
 % class diagram
 \begin{figure}[h]
@@ -131,14 +132,15 @@ The class \texttt{ProbabilisticPageLevelWrapper} finds the single most probable 
 \end{figure}
 
 % entities
+\texttt{HtmlTreeFactory} builds a tree structure from Java DOM model. \texttt{ProbabilisticChangeModelFactory} loads probabilities from a comma separated file into \texttt{ChangeModel} class. The actual web wrapping is performed by \texttt{HtmlRecordWrapper}.
 
 % behaviour for each entity
 
-\paragraph{HtmlRecordWrapper}
+\paragraph{HtmlRecordWrapper} The class \texttt{HtmlRecordWrapper} parses HTML document string into DOM with the help of JSoup library. This library tidies HTML and parses into a clean tree. The class accepts CSS selector for identifying a distinguished node. Next, DOM is mapped to internal tree structures and the wrapping is performed.
 
-\paragraph{ProbabilisticChangeModelFactory}
+\paragraph{ProbabilisticChangeModelFactory} The class \texttt{ProbabilisticChangeModelFactory} reads a comma separated file into memory.
 
-\paragraph{HtmlTreeFactory}
+\paragraph{HtmlTreeFactory} The class \texttt{HtmlTreeFactory} maps DOM tree node by node into local tree data structure. Only emlement and text nodes are mapped, ignoring attributes, comments, CDATA, etc. nodes.
 
 
 % vim:wrap linebreak nolist:
