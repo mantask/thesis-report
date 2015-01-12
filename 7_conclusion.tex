@@ -1,19 +1,26 @@
 \chapter{Conclusion}
 % Just 1-3 pages!
+% You can conclude that you have reached your goal or discuss why not if that is the case. Also discuss hindsights: What things were even better or a little worse than expected regarding the methods you used to solve your problems. How could your project be improved by further work.
 
-You can conclude that you have reached your goal or discuss why not if that is the case. Also discuss hindsights: What things were even better or a little worse than expected regarding the methods you used to solve your problems. How could your project be improved by further work.
+% Summary
 
-\section{Summary}
+In this paper, we introduced an idea of using a robust probabilistic wrapper for multiple data record extraction. We combined state-of-the-art web wrapping and data record extraction methods into a coherent framework for robust record-level wrapping. As part of the project, we designed an algorithm, implemented it in Java, and tested it with real world data sets.
 
-\section{Conclusion}
+% Conclusion
 
-\section{Future Research} % (fold)
-\label{sec:section name}
+With our wrapper design, we were able to achieve the objectives as described in Section~\ref{sec:contribution}. First, our record-level wrapper initializes from a single snapshot of a web page. Second, the experiment proved the wrapper to be robust, with accuracy around $70\%$. Finally, the execution time of our algorithm was reasonable with real world web pages, i.e. under $2$ seconds.
 
-Content models.
-Content-based rules (content patterns), exploit the structure of the field itself.
-Dynamic pages in JavaSript and AJAX
+% TODO what went wrong or succeeded
 
-% section section name (end)
+% Future Research
+
+Although we were able to prove that our concept is viable, the accuracy measures were not as high as we expected. As part of the future work, the algorithm could exploit not only the structure, but also the content of web pages by recognizing and matching patterns as suggested in [TODO ref]. This should improve the overall accuracy of wrapping.
+
+As a second direction for extension, data region locator could try to merge two or more regions with similar data record structure. This would significantly improve non-contigouos region handling and overall accuracy of wrapping.
+
+Finally, the change model could be improved during the process of wrapping. In other words, after wrapping the next web page, the probabilities of probabilistic transducer could be updated.
+
+The combination of proposed techniques could lead to an improved wrapping accuracy.
+
 
 % vim:wrap linebreak nolist:

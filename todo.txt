@@ -1,10 +1,5 @@
-experiment
-	graphs
-	comments
-	discussion
-conclusion
-	summar
-	conclusion
-	future research
 rewrite main concepts sections
 go through section-by-section
+redraw charts
+add more references
+what can be added as Appendex? Source code?
