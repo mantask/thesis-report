@@ -5,11 +5,11 @@
 %-------------------------
 \section{Experiment Setup}
 
-\paragraph{Implementation} We have implemented a full framework for robust web extraction in Java. The framework is packaged as a component for easy use in other projects. We have used this component to carry out an experiment, which is described in more detail below. For details on the implementation, dataset and results we refer to the project homepage at \url{https://bitbucket.org/mantiniss/thesis-wrapper}.
+\paragraph{Implementation} We have implemented a full framework for robust web extraction in Java. The framework is packaged as a component for easy use in other projects. We have used this component to carry out an experiment, which is described in more detail below. For details on the implementation and the dataset please refer to the project homepage at \url{https://bitbucket.org/mantiniss/thesis-wrapper}.
 
-\paragraph{Test data} To test the efectiveness of our algorithm, we used snapshots of web pages from the \emph{Internet Archive} (\url{archive.org}). In particular, we focused on two websites: an e-commerce website \url{amazon.com} for extracting book listings and a movie database \url{imdb.com} for extracting movie titles.
+\paragraph{Test data} To test the performance of our algorithm, we used snapshots of web pages from the \emph{Internet Archive} (\url{archive.org}). In particular, we focused on two websites: an e-commerce website \url{amazon.com} for extracting book listings and a movie database \url{imdb.com} for extracting movie titles.
 
-For each of the websites, we chose an HTML document with a list of data records, e.g. a list of books or a list of movies. We collected a set of 10 snapshots of the same page over the period of ten weeks. The details of both datasets are provided in Figure~\ref{tbl:dataset}.
+For each of the websites, we chose a random HTML document with a list of data records, e.g. a list of books or a list of movies. For \url{amazon.com} we picked \emph{Most Popular TV Series, Feature Films, TV Movies} page and for \url{imdb.com} we chose \emph{Books: Last 30 days} page. We collected a set of 10 snapshots of the each page over extensive period. The details of both datasets are provided in Figure~\ref{tbl:dataset}.
 
 \begin{figure}[h]
 	\centering
@@ -17,22 +17,22 @@ For each of the websites, we chose an HTML document with a list of data records,
 		\hline
 		\textbf{Website} & \url{imdb.com} & \url{amazon.com} \\
 		\hline
-		\textbf{Number of pages} & 10 & 10 \\
+		\textbf{Number of page snapshots} & 10 & 10 \\
 		\hline
-		\textbf{Number of versions per page} & 10 & 10 \\
+		\textbf{Earliest crawl time} & 20 Oct, 2014 & 25 Feb, 2014 \\
 		\hline
-		\textbf{Average size of the tree} & 10 & 10 \\
+		\textbf{Latest crawl time} & 30 Dec, 2014 & 26 Aug, 2014 \\
 		\hline
-		\textbf{Earliest crawl time} & 26 June, 2014 & 26 June, 2014 \\
+		\textbf{Number of data records per page} & 100 & 12 \\
 		\hline
-		\textbf{Latest crawl time} & 26 June, 2014 & 26 June, 2014 \\
+		\textbf{Average tree size} & 5521 & 2223 \\
 		\hline
     \end{tabularx}
 	\caption{Dataset details (source: \emph{Internet Archive}).}
 	\label{tbl:dataset}
 \end{figure}
 
-\paragraph{Distinguished nodes} We mark a single distinguished node on each HTML document manually by writing XPath queries. After the wrapper collects data record attributes, we manually check the number of results and the correctness of the results. We test the correctness by seeing, if the result contains the right attribute value from a data records. The process is completely manual, but considering the small dataset we decided to keep it that way.
+\paragraph{Distinguished nodes} We marked a single distinguished node on each HTML document by manually writing XPath queries: \texttt{//*[@id="result\_0"]/div[4]/h3/a} and \texttt{//*[@id="main"]/table/tbody/tr[2]/td[3]/a}. After the wrapper collects data record attributes, we manually check the number of results and the correctness of the results. We test the correctness by seeing, if the result contains the right attribute value from a data records. The process is completely manual, but considering the small dataset we decided to keep it that way.
 
 Thinking about a larger data set, the process of results verification could be automated following a method by Parameswaran et al. \cite{DBLP:journals/pvldb/ParameswaranDGR11}. In his experiment, the author chose to extract easily verifiable piece of information, e.g. vote count which matches a pattern "\{n\} votes". Thus the process could be automated by matching extracted results against this pattern. Due to limited time, we chose not to automate certain parts of the experiment.
 
@@ -46,15 +46,17 @@ The test take an old version of an HTML document, a distinguished node, and a tr
 
 \paragraph{Accuracy} As a primary measure of success, we track the number of data records returned correctly. That is, if the transformed HTML document contains 20 data records, and our wrapper correctly locates and extracts information from 18 items, we measure our accuracy as $18 / 20 = 90\%$. The higher the accuracy, the better our algorithm performs.
 
-\paragraph{Skip size} We measure how well our wrapper performs with relation to the time between initial and transformed HTML document snapshots. We use \emph{skip size} as a measure of time between document versions. A pair of snapshots have a skip size of $n$, if the transformed snapshot was taken $k$ weeks after the initial one. The larger the skip size, the more the page has evolved. In our experiment, we vary skip size ($k = 1, 3, 5$) for each data set.
+\paragraph{Skip size} We measure how well our wrapper performs with relation to the time between initial and transformed HTML document snapshots. We use \emph{skip size} as a measure of time between document versions. A pair of snapshots have a skip size of $n$, if the transformed snapshot was taken $k$ weeks after the initial one. The larger the skip size, the more the page has evolved. In our experiment, we vary skip size ($k = 1, 2, 3$) for each data set.
 
-\paragraph{Execution time} We also measure the time taken to extract multiple data record attributes. Since reasonable execution time is one of the goals for the wrapper, this measure is important. We perform our test on Intel Core i5-2410M processor running 2.30 GHz on 4 cores.
+\paragraph{Execution time} We also measure the time taken to extract multiple data record attributes. Since reasonable execution time is one of the goals for the wrapper, this measure is important. We perform our test on \emph{Intel Core i5-2410M} processor running at 2.30 GHz on 4 cores.
 
 
 %---------------------------
 \section{Experiment Results}
 
-We plotted ... in Figure~... As can be seen from the figures, ....
+In the experiment, we ran the wrapper for three skip sizes ($k = 1, 2, 3$) and plotted the results in a Figure~\ref{}. As can be seen from the figures, ....
+
+% TODO compare to Page-level wrapping
 
 
 %-------------------

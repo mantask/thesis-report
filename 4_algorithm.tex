@@ -351,7 +351,16 @@ In the Algorithm~\ref{alg:optimal-probabilistic-wrapper}, the core function is $
 [TODO Talk about TP and its importance.]
 TP calculates the probability of transforming a forest $f_1$ into a forest $f_2$, given insertion, deletion and substitution operations and their probabilities, i.e. change model. Implements function $DP_1(F_s, F_t)$, which calculates prob that $P_{\theta}(T|S)$, i.e. that $\pi(F_s) = F_t$.
 
-$$DP_1(F_s, F_t) = DP_2(F_s, F_t) + P_{ins}(v) \times DP_1(F_s, F_t - v)$$
+\begin{equation}
+	DP_1(F_s, F_t) = DP_2(F_s, F_t) + P_{ins}(v) \times DP_1(F_s, F_t - v)
+\end{equation}
+
+\begin{equation}
+	\begin{split}
+		DP_2(F_s, F_t) = P_{sub}(u, v) \times DP_1(F_2 - [u], F_t - [v]) \times DP_1(\lfloor u \rfloor, \lfloor v \rfloor) \\
+		+ P_{del}(u) \times DP_2(F_s - u, F_t)
+	\end{split}
+\end{equation}
 
 
 
