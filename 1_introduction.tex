@@ -136,16 +136,14 @@ In this paper, we present a new method for fast and robust record-level data ext
 % 3. Why do you think that your method will be better? (This is in fact the thesis of your thesis.) You should elaborate a bit on each of these points. That is, relate your approach to the state-of-the-art and argue for your choice.
 Data records on the web and probabilistic change models for trees have not been combined before into a coherent system. We demonstrate that our method is both fast and accurate. (TODO more about the experiment setup and findings later) We also show that chosen techniques can be optimized / fine-tuned for specific use-case to get better performance and accuracy.
 
-% TODO
-We have implemented the method in Java and used the implementation to evaluate and fine tune the method. The evaluation shows that ... achieves higher accuracy, precision and robustness than the alternatives approaches...
+We have implemented the method in Java and used the implementation to evaluate and fine tune the method. The tests performed show that the web record wrapping is successful with a high level of accuracy.
 
-% TODO
 The contribution can be summed up:
 
 \begin{enumerate}
-	\item A novel algorithm for robust record-level wrapping using single annotated page as a training set.
-	\item A full implementation in Java, parametrized ... (available at \url{https://bitbucket.org/mantiniss/thesis-wrapper}).
-	\item An experimental evaluation and comparison of different algorithm variations based on about XXX HTML pages taken from YY web sites over a period of more than a ZZZ.
+	\item A novel algorithm for robust record-level wrapping, using single annotated page as a training set.
+	\item A full implementation in Java, packaged as a component for use in other projects (see Appendix~\ref{ch:source} or online source repository at \url{https://bitbucket.org/mantiniss/thesis-wrapper}).
+	\item An experimental evaluation of the algorithm performance and accuracy, based on ten snapshots of two HTML pages over a period of more than a half year.
 \end{enumerate}
 
 % TODO Why? Alternatives? 
@@ -179,7 +177,7 @@ The contribution can be summed up:
 % ------------------------------------------------------------
 \section{Organization}
 
-We define the main concepts of the problem domain in Chapter 2. In Chapter 3 we discuss current state of the art across relevant lines of research. Chapters 4-8 describe our method in detail and elaborate on the design decisions. We present the empirical experiment results in Chapter 9. The thesis is conluded with findings discussion and future research direction.
+We define the main concepts of the problem domain in Chapter~\ref{ch:concepts}. In Chapter~\ref{ch:related-work}, we discuss current state of the art across relevant lines of research. Chapters~\ref{ch:algorithm}-\ref{ch:implementation} describe our method in detail and elaborate on the design decisions. We present the empirical experiment results in Chapter~\ref{ch:results}. The thesis is conluded with findings discussion and future research direction in Chapter~\ref{ch:conclusion}.
 
 
 % vim:wrap linebreak nolist:
