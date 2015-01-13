@@ -6,11 +6,11 @@
 \section{Summary}
 % What was the idea and what was done
 
-In this paper, we introduced an idea of using a robust probabilistic wrapper for multiple data records extraction. We combined state-of-the-art web wrapping and data record extraction methods into a coherent framework for robust record-level wrapping. As part of the project, we designed an algorithm, implemented it in Java, and tested it with real world data sets.
+In this paper, we introduced an idea of using a robust probabilistic wrapper for multiple data records extraction. We combined state-of-the-art web wrapping and data record mining methods into a coherent framework for robust record-level wrapping. As part of the project, we designed an algorithm, implemented it in Java, and tested it with real world data sets.
 
 
 %-------------------
-\section{Conclusion}
+\section{Discussion}
 % what was good/not so good, what could be done differently, was the goals met?
 
 With our wrapper design, we were able to achieve the objectives as described in Section~\ref{sec:contribution}. First, our record-level wrapper initializes from a single snapshot of a web page. Second, the experiment proved the wrapper to be robust, with accuracy around $70\%$. Finally, the execution time of our algorithm was reasonable with real world web pages, i.e. under $2$ seconds.
@@ -21,6 +21,7 @@ With our wrapper design, we were able to achieve the objectives as described in 
 
 % -------------------
 \section{Future Work}
+\label{sec:future-work}
 % what does this project leads to? What is missing? What next?
 
 Although we were able to prove that our concept is viable, the accuracy measures were not as high as we expected. As part of the future work, the algorithm could exploit not only the structure, but also the content of web pages by recognizing and matching patterns as suggested in [TODO ref]. This should improve the overall accuracy of wrapping.
