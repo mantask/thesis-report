@@ -108,6 +108,8 @@ We assume that a distinguished node remains present in the future versions of th
 The Algorithm~\ref{alg:prob-record-level-wrapper} first locates the data region $dr$ in the original tree $w$ that contains the distinguished node $d(w)$ as in Line 1. In Line 2, the data records from the data region $dr$ are merged into a generalized record $r$. As tree structure might slightly vary per record, this step ensures that the base record for wrapping contains the most general template. The candidate node $c'$ is identified on Line 3. With that, on Line 4 a data region $dr'$ in the trasnformed tree $w'$ is located. Finally, each data record $r'$ from the newly found data region $w'$ is locally wrapped with a probabilistic wrapper on Line 5.
 
 % TODO Why it works?
+% It would be nice if you could address correctness issues at some level. I would expect that proofs (formal or informal) would not be within reach, but you may add something like a discussion about what correctness means and how it can be addressed.
+
 
 % The building blocks and motivation
 The Algorithm~\ref{alg:prob-record-level-wrapper} consists of three main methods, which are described in the following sections:
