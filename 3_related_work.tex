@@ -8,111 +8,109 @@
 % Gist + My comment
 % TODO: go through each paper and make short notes on what's important and why.
 
-The method presented in this paper builds on the previous work in wrapper induction, HTML aware data extraction, probabilistic tree-edit distance measures, and data record mining. The most influential ideas are covered in chapter.
+The method presented in this paper builds upon the previous work on wrapper induction, HTML aware data extraction, probabilistic tree-edit distance measures, and data record mining. The most influential ideas are covered in this chapter.
 
 
 % ---------------------------------------------------------------------
 \section{Wrapper Induction Method Overview}
 % discuss classification and state our focus
 
-The problem of data extraction (from web pages?) has been addressed in a number of papers. \cite{Laender:2002:BSW:565117.565137} reviews multiple techniques for generating wrappers, including natural language processing, languages and grammar, machine learning, information retrieval, databases, and ontologies. A common goal of all wrapper generation tools is to build a wrapper that is both accurate and robust, but is built with the least possible human interaction. The article provides a taxonomy for grouping wrapping techniques.
+The problem of data extraction, especially from web pages, has been addressed in a number of papers. Laender et al. \cite{Laender:2002:BSW:565117.565137} group wrapping techniques into multiple categories, including natural language processing, languages and grammar, machine learning, information retrieval, databases, and ontologies. A common goal of all wrapper generation tools is to build a wrapper that is both accurate and robust, but is built with the least possible human interaction. The article provides a taxonomy for grouping wrapping techniques.
 
 The most relevant category mentioned in the paper is the HTML-aware tools. These rely on structural features of HTML documents. The document is parsed into a tree structure and extraction rules are applied to the tree. Although the tools discussed (XWRAP, W4F, RoadRunner) provide a high degree of automation, many of them rely on heuristics and have a weak notion of robustness.
 
-In a more recent overview of web data extraction techniques \cite{Chang:2006:SWI:1159162.1159300} the author argues, that due to template generated content, web IE problems can take advantage machine learning and pattern matching methods. Compare it to traditional IE approaches that are mostly based on natural language processing (NLP). Unsupervised approaches can only support template pages. The extension of such systems to non-template page extraction tasks is very limited.
+In a more recent overview of web data extraction techniques \cite{Chang:2006:SWI:1159162.1159300}, Chang et al. argue, that due to template generated content, web information extraction can take advantage of machine learning and pattern matching methods, while traditional approaches are mostly based on natural language processing. The author argues, that unsupervised approaches can only support pages based on a template. The extension of such extraction tasks to support non-template based pages is very limited.
 
-As our research focus is data extraction from HTML documents which are semi-structured, we focus on techniques based on structural features rather than vague NLPs that require large training sets. Yet the content models are interesting direction for extra accuracy.
+Our research deals with data extraction from HTML documents, which are semi-structured by definition. Thus, we focus on the techniques based on structural features rather than vague natural language processing, which requires large training sets. Yet, the content features are also interesting for extra accuracy, but we leave it for future work.
 
-% TODO Liu
-Several approaches have been reported in the literature for mining data records from Web pages.  There are two main types of algorithms, wrapper induction and automatic extraction. In wrapper induction [11, 19, 23, 25, 33], a set of extraction rules are learnt from a set of manually labeled pages or data records. These rules are then used to extract data items from similar pages. This method still requires substantial manual efforts. In automatic methods, [12][1] find patterns or grammars from multiple pages containing similar data records. Requiring an initial set of pages containing similar data records is, however, a major limitation of this type of approaches because such pages have to be found manually or by another system.
+% wrapper induction system
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\textwidth]{figures/wrapper-induction}
+	\caption{Wrapper induction system as described by Chang et al. \cite{Chang:2006:SWI:1159162.1159300}.}
+	\label{fig:wrapper-induction}
+\end{figure}
+
+Zhai and Liu \cite{zhai2005a} report, that there are two main methods for data record extraction: wrapper induction and automatic extraction. In wrapper induction (see Figure~\ref{fig:wrapper-induction}), a user manually annotates a set of pages and extraction rules are learnt. Data extraction from future pages are based on these rules. The problem with this method is that it requires a fairly large set of manually labeled pages. In automatic extraction, patterns are identified from multiple pages. A major limitation is that pages have to be clustered by similarity, which is again a manual process.
+
 
 % ---------------------------------------------------------------------
 \section{HTML Aware Data Extraction}
 % elaborate on the research in the area of our focus
 
 % IBM Report: Robust Web Data Extraction with XML Path Expressions
-One the the first papers to discuss XPath based wrappers was \cite{Myllymaki02robustweb}. In this approach, XML tools are used convert HTML document into pure XHTML and XPath queries extract desired pieces of information. The wrapper is a set of XSLT extraction rules, i.e. hops that are based on structure, attributes, or content. Yet the actual XPath queries were written by hand without any automation.
+One the the first papers to discuss XPath based wrappers was \cite{Myllymaki02robustweb}. In this work, XML tools are used convert HTML document into pure XHTML and later XPath queries extract desired pieces of information. The wrapper is a set of XSLT extraction rules, i.e. hops that are based on structure, attributes, or content. Yet, the actual XPath queries were written by hand without much automation.
 
-The same paper mentions robustness as a feature of a good extraction rule. The author informally defines robustness as the ability to extract intended data from an HTML page after structural changes to the page. Two metrics for measuring robustness are introduced. The first is a number of times that expression failed to extract correct results. The second is expression complexity in terms of depth. The paper defines a notion of anchors (DOM tree nodes) and hops (relative XPath expressions) over a normalized HTML document. 
+The same paper mentions \emph{robustness} as a feature of a good extraction rule. The author informally defines robustness as the ability to extract intended data from an HTML page after structural changes to the page. Two metrics for measuring robustness are introduced. The first is a number of times that expression failed to extract correct results. The second is expression complexity in terms of depth. The paper defines a notion of \emph{anchors} (DOM tree nodes) and \emph{hops} (relative XPath expressions) over a normalized HTML document. 
 
 % Relative vs absolute queries: Robust Web Content Extraction
-Some techniques \cite{Chang:2006:SWI:1159162.1159300} improve the robustness of XPath expression. The general approach of these techniques is to rewrite the expression into a more robust relative one by tracking structural changes in the training set. \cite{Kowalkiewicz:2006:RWC:1135777.1135928} empirically confirmed that there is a notable difference between various versions of wrappers in terms of robustness – relative XPath expressions outperform absolute ones significantly. This proves the idea that some wrappers are more robust.
+Chang et al. \cite{Chang:2006:SWI:1159162.1159300} mention techniques that improve the robustness of XPath expressions. A general approach of these methods is to rewrite the query in a way that it depends on more stable elements of HTML tree. This is achieved by tracking structural changes in the training set. \cite{Kowalkiewicz:2006:RWC:1135777.1135928} empirically confirmed that there is a notable difference between various versions of wrappers in terms of robustness -- a relative XPath expressions outperform absolute ones significantly. This proves the idea that some wrappers are more robust.
 
 % Vertex tool
-\cite{DBLP:conf/icde/GulhaneMMRRSSTT11} introduces apriori style algorithm for learning xpath-based extraction rules that are robust to variations in site structure. Algorithm learns rules from human annotated pages based on structural features. Based on domain knowledge, these features are classified into strong (e.g. HTML attributes \texttt{class} or \texttt{id}, tags, textual fragments) and weak (e.g. \texttt{font}, \texttt{width} attributes). This method tries to build a path from strong features only by generating and combining candidates. If Apriori fails to output precise XPath, Naive-Bayes based classifier is used to evaluate the best guess of newly generated nodes with weak features. Essentially this method is based on enumeration, which makes it slow for large websites. Additional limitations are the use of large training set and that it requires a set of annotated pages for certain heuristics (e.g. support metrics) to properly work. 
+Gulhane et al. \cite{DBLP:conf/icde/GulhaneMMRRSSTT11} introduce apriori style algorithm for learning XPath-based extraction rules that are robust to variations in site structure. Algorithm learns structural rules from human annotated pages. Based on domain knowledge, these features are classified into strong (e.g. HTML attributes \texttt{class} or \texttt{id}, tags, textual fragments) and weak (e.g. \texttt{font}, \texttt{width} attributes). This method tries to build an XPath query from strong features only by generating and combining candidates. If apriori fails to output precise XPath, Naive-Bayes based classifier is used to evaluate the best guess of newly generated nodes with weak features. Essentially, this method is based on enumeration, which makes it slow for large websites. Additional limitations are the use of large training set and that it requires a set of annotated pages for certain heuristics (e.g. support metrics) to properly work. 
 
 % WebSelF tool
-\cite{Thomsen:2012:WWS:2364120.2364156} presents a framework that takes into account not only the structure and the content of a scrapped page, but also the context and the presentation, i.e. the location where the data is physically located after full rendering and applying stylesheets. It also works with dynamic page elements, that are frequent in JavaScript rich web pages. The design of the framework consists of three type of functions: for selecting elements, for for verifying the selected elements, and for maintaining the previous functions.
-
-- http://www.cs.uic.edu/~liub/WebMiningBook.html\\
+Thomsen et al. \cite{Thomsen:2012:WWS:2364120.2364156} present a framework that takes into account not only the structure and the content of a scrapped page, but also the context and the presentation, i.e. the location where the data is physically located after full rendering and applying stylesheets. It also works with dynamic page elements, that are frequent in JavaScript rich web pages. The design of the framework consists of three type of functions: for selecting elements, for for verifying the selected elements, and for maintaining the previous functions. Complementing structural information with visual details is an interesting direction, but we focus on just the structure.
 
 
 % ---------------------------------------------------------------------
-\section{Tree-Edit Models}
+\section{Tree-Edit Distance}
+\label{sec:tree-edit-distance}
 
-% Zhang-Shasha edit-tree distance
-To compare similarity of two HTML documents we can use string edit distance or tree edit distance. A distance between two labeled ordered rooted trees is considered to be the weighted number of edit operations (insert, edit, delete) to transform one tree into another \cite{shasha1990a}. The proposed algorithm to address the problem of finding the minimum set of operations to transform one tree into another has a complexity of $O(n_1 n_2 h_1 h_2)$, where $n_1$ and $n_2$ are the size of the trees, and $h_1$ and $h_2$ are heights of the trees.
+% A Survey on Tree Edit Distance and Related Problems
+In a recent survey on tree-edit distance problem by Bille \cite{bille2005a} a number of solutions are overviewed. While it has been shown that edit distance problem is NP-complete for unordered trees, for ordered trees dynamic programming algorithms exist. Several algorithms have been proposed, among them Shaha and Zhang \cite{shasha1990a} and Demaine et al. \cite{demaine2007a} with time complexity of $O(m^2 n^2)$ and $O(n^ 2m(1+\log_m n))$  for trees with $m$ and $n$ nodes respectively. The efficiency of the two algorithms heavily depends on the tree shape and it is hard to chose between them. 
+
+% RTED - A Robust Algorithm for the Tree Edit Distance
+Addressing this problem, a robust algorithm \emph{RTED} has been proposed by Pawlik and Augsten \cite{pawlik2011a}. \emph{RTED} is not only tree-shape independent, but for any problem instance computes as many relevant subproblems as the best competitor must compute. \emph{RTED} runs in $O(n^3)$ time and in many cases outperforms the competitors. Moreover, the authors provide a Java library for use in own projects. Thus, we use \emph{RTED} in our data record mining algorithm.
 
 % Automatic web news extraction using tree edit distance by Reis'04
-In \cite{de2004a} author introduces \emph{Restricted Top-Down Mapping} algorithm, which calculates edit-tree distance by efficiently analysing tree structure. Generally, the algorithm imposes top-down mappings which allow removal and inserts at the bottom of the tree only. Informally, we expect some minor changes inside templates, i.e. just the content at the bottom of the elements.
+Alternatively, a number of restricted tree-edit distance algorithms exists. For example, in \cite{de2004a} Reis et al. introduce a \emph{Restricted Top-Down Mapping} algorithm, which calculates edit-tree distance by efficiently analysing tree structure. Generally, the algorithm imposes top-down mappings which allow removal and inserts at the bottom of the tree only. It is based on assumption that just the content at the bottom of the elements changes. We discard these algorithm variations as too focused on edge cases and not suitable for a general use-case.
 
-% Broom analogy
-The paper \cite{de2004a} introduces the idea of tree extractor, i.e. tree structure with wildcards for matching HTML documents. This step recognizes common pattern between two trees. Basically, the template is reconstructed from multiple HTML fragments.
 
-% TODO
-- A Survey on Tree Edit Distance and Related Problems\\
+%----------------------------------------------
+\section{Probabilistic Change Model}
 
-% Edit cost / Change model
-In \cite{de2004a} two tree similarity threshold as fixed constant of 80\%. Every vertex insertion, removal or replacement has unit cost of one. In \cite{dalvi2009a} the probability distribution of the next page state is based on structural patterns in the training set.
+% [Dalvi'09] Probabilistic change model
+Essential ingredient in tree-edit distance calculations is the actual cost of each edit operation. However, none of the algorithms discussed define the \emph{probability distribution}, i.e. they assume that the costs are provided. Clearly, assumption that each transformation has a unit cost does not represent the real world. Dalvi et al. \cite{dalvi2009a} show that certain operations are more probable than others. Authors use iterative numerical methods to estimate the \emph{change model}, i.e. probability distribution, from a set of web page snapshots.
 
-% TODO Rewrite [Dalvi'09]
-A number of papers have focused on finding the edit distance, or shortest editing script that changes a source tree to a target tree (see [6] and citations). There are also weighted versions of tree edit distances that assign different weights to different edit operations. However, these models do not define a probability distribution: they do not compute the probability of a source tree changing to the target tree, but only the shortest/lightest path according to the weights. To see the difference, consider the two tree transformations of Figure 12. Clearly, each transformation has an edit distance of 1; in the first case, corresponding to deletion of the leftmost L1 child, and in the second case corresponding to the deletion of any of the n nodes. Clearly, the second transformation is far more probable (if individual edits have the same probability). The lack of a probability distribution also makes it difficult to define a principled learning component that can learn the weights of various edit operations.
-
-% TODO
-- RTED - A Robust Algorithm for the Tree Edit Distance\\
-
-% TODO
-- Simple fast algorithms for the editing distance between trees and related problems\\
-
-% TODO
-- React’s diff algorithm\\
-
-Probabilistic model allow to formalize robustness.
+Having probabilities of edit operations and a method for calculating tree-edit distance, we can now efficiently compute the probability of one tree evolving into the other. This allows to formally define wrapper \emph{robustness} as the ability for the wrapper to work on the future snapshots of the web page. 
 
 % [Dalvi'09] Robust Web Extraction - An Approach Based on a Probabilistic Tree-Edit Model
-Dalvi et al. to view page evolution as a stochastic process, where individual edit operations (delete, insert and substitute) are picked by their probability \cite{dalvi2009a}. Probabilities are learnt from a training set. The author introduces algorithm for efficiently estimating the probability of one tree evolving into the other. In other words, provides a first formal definition of robustness. Generates a set of candidate XPath wrappers and selects the most robust one. The problem with this approach is that it picks the local optimum from a generated set, rather the provably global optimum.
+Extending this idea, Dalvi et al. \cite{dalvi2009a} build a robust web extraction framework (see Figure~\ref{fig:web-extraction-framework}).  The method generates a set of candidate XPath wrappers and selects the most robust one. The problem with this approach is that it picks the local optimum from a generated set, rather the provably global optimum.
 
 % Robust web extraction framework
-\includegraphics[width=\linewidth]{figures/robust-web-extraction-framework}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{figures/robust-web-extraction-framework}
+	\caption{Robust web extraction framework.}
+	\label{fig:web-extraction-framework}
+\end{figure}
 
 % [Parameswaran'11] Optimal Schemes for Robust Web Extraction
-Building on prior work on formalizing wrapper robustness \cite{dalvi2009a}, Parameswaran et al. \cite{DBLP:journals/pvldb/ParameswaranDGR11} elaborate the concept of robustness and provides a method for building wrappers with provably optimal robustness. Two robustness models are introduced: the worst case and the most probable case. An algorithm for computing optimal wrapper is introduced of polynomial running time. Yet it is inefficient due to enumeration for computing the minimum cost scripts and extracting the distinguished node of interest \cite{DBLP:conf/wism/LiuWYL12}.
+Parameswaran et al. \cite{DBLP:journals/pvldb/ParameswaranDGR11} elaborate the concept of robustness and provide a method for building wrappers with provably optimal robustness. Two robustness models are introduced: the worst case and the most probable case. An algorithm for computing optimal wrapper in polynomial running time is introduced. Yet, it relies on enumeration to compute the minimum cost scripts and to extract the distinguished node \cite{DBLP:conf/wism/LiuWYL12}.
+
+% Discussion
+We could not find alternative formal definitions of wrapper robustness that took into account structural properties of HTML documents. Combined with a number of heuristics (alignments, subforest optimization, early pruning, etc.), robust web extraction proves to be both accurate and fast. Both of the features that are required in our wrapper. The only major problem with approach, is that it only supports single distinguished node per HTML document. Thus, we need a good way to separate individual data records.
 
 
 % ---------------------------------------------------------------------
 \section{Data Record Mining}
 
-\cite{liu2009a} proposes a Mining Data Records (MDR) algorithm for automatically locating data records in web pages. In other words, MDR finds page regions generated by a template. The method is based on edit distance string matching algorithm to find data records and two observations about data records in an HTML document. First, a group of data records have similar tree structure and are located in a close proximity. Second, these groups are under one parent node, i.e. it is very unlikely that a single record would begin inside one child subtree and end inside another child subtree. The algorithm works both with continuous and noncontinuous data regions. The proposed method uses string matching rather than HTML tree structure, which is more accurate.
+% Data record mining
+Liu et al. \cite{liu2009a} propose a \emph{Mining Data Records} (MDR) algorithm for automatically locating data records in web pages. In other words, MDR finds page regions generated by a template. The method is based on (1) string edit distance algorithm to find data records and (2) two observations about data records in an HTML document. First, a group of data records have similar tree structure and are located in a close proximity. Second, these groups are under one parent node, i.e. it is very unlikely that a single record would begin inside one child subtree and end inside another child subtree. The algorithm works both with continuous and noncontinuous data regions. 
 
-Building on Liu et al. work \cite{liu2009a}, Zhai and Liu further develops the idea of extracting data from a web page that contains several structured data records \cite{zhai2005a}. Their method is based on visual clues: style and position of elements after rendering. After identifying individual data records, the proposed approach aligns multiple tag trees into a generic \emph{seed tree}. The seed tree contains a maximum number of data record fields. (TODO: Elaborate) 
+% discussion
+We find this method to be efficient, as it does not require training set and is fast. However, we believe that tree-edit distance is more accurate measure than string matching in HTML documents.
 
-Similarly, in \cite{zheng2007a} the DOM tree is progressively converted into a generic page-level wrapper tree. A cost-driven dynamic programming is employed for the alignment algorithm. The issue with this approach is that tree-mapping operations are expensive. Zheng et al. further develop tree alignment idea \cite{DBLP:conf/cikm/ZhengSWG09} and introduce a concept of \emph{broom} structure, which effectively is a generalized record-level wrapper. By restricting alignment to relevant DOM regions, the tree alignment cost is reduced dramatically. It also handles case of cross records and uses content matching for improved record extraction.
+% Web data extraction based on partial tree alignment
+Building on Liu et al. work \cite{liu2009a}, Zhai and Liu further develops the idea of extracting data from a web page that contains several structured data records \cite{zhai2005a}. Their method is based on visual clues: style and position of elements after rendering. After identifying individual data records, the proposed approach aligns multiple tag trees into a generic \emph{seed tree}. The seed tree contains a maximum number of data record fields.
 
-% TODO
-Both of the aforementioned tree alignment techniques are important for repeated record-level wrapping. This tree is an important structure to enable generalized wrapper for multiple record extraction.
+% Joint Optimization of Wrapper Generation and Template Detection
+% Efficient record-level wrapper induction
+Similarly, in \cite{zheng2007a} the DOM tree is progressively converted into a generic page-level wrapper tree. A cost-driven dynamic programming is employed for the alignment algorithm. The issue with this approach is that tree-mapping operations are expensive. Zheng et al. further develop tree alignment idea \cite{DBLP:conf/cikm/ZhengSWG09} and introduce a concept of \emph{broom} structure, which effectively is a generalized tree for record wrapping by alignment. Basically, the template is reconstructed from multiple HTML fragments. By restricting alignment to relevant DOM regions, the tree alignment cost is reduced dramatically. It also handles case of cross records and uses content matching for improved record extraction.
 
-Summary of pattern extraction. Automatic data extraction. Tree alignment to extract data by a template.
+% discussion
+Both of the aforementioned tree alignment techniques present an interesting idea in record-level wrapping. They both try to reconstruct the template by generalizing multiple records into a generic template tree. We further explore this idea in our wrapper design.
 
-\paragraph{Automatic Wrappers for Large Scale Web Extraction.} Dictionaries and regular expressions. Content models?
-
-% TODO rewrite as quoted from [REIS'04]
-Bing Liu et al. have developed an effective algorithm for mining
-data records from Web pages [14]. The algorithm has two steps.
-In the first step it identifies the data region of the Web page and in
-the second one it extracts the records themselves. The algorithm
-works each time in a single page, so it does not compare the page
-trees. Although achieving good results, the algorithm only works
-with multi-record pages and therefore cannot be applied to on-line
-news pages, that are almost exclusively single-record pages.
 
 % vim:wrap linebreak nolist:
