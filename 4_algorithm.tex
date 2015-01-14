@@ -4,7 +4,7 @@
 
 In this chapter, we introduce our algorithm for a robust record-level data extraction. We explain the main concepts and describe the logic in detail.
 
-Given an innitial web page snapshot with a single annotated book title, the algorithm extracts multiple movie titles from a future version of the same web page. The algorithm is designed to be fast and robust, require only a single annotated page for training, and extracts data from multiple records inside a tree.
+Given an initial web page snapshot with a single annotated book title, the algorithm extracts multiple movie titles from a future version of the same web page. The algorithm is designed to be fast and robust, require only a single annotated page for training, and extracts data from multiple records inside a tree.
 
 To illustrate the principles, we use a deliberately simple example from Figure~\ref{fig:amazon-books-html} and extract book titles from a web page. The main steps are depicted in Figure~\ref{fig:algorithm}.
 
@@ -16,9 +16,9 @@ To illustrate the principles, we use a deliberately simple example from Figure~\
 \end{figure}
 
 % How each method work. How they are combined.
-The main idea of the new method is to split the wrapping process into two steps. First, we locate a relevant data region and find the boundaries of each data record. To cover structural variations, we progressively merge data records inside the original HTML into a generic tree. This tree is later used as an base for wrapping from the future pages. 
+The main idea of the new method is to split the wrapping process into two steps. First, we locate a relevant data region and find the boundaries of each data record. To cover structural variations, we progressively merge data records inside the original HTML into a generic tree. This tree is later used as a base for wrapping from the future pages. 
 
-Next, we operate inside the boundary of each record in the transformed page and run a robust page-level wrapper. The wrapper is based on a tree-edit distance calculations with probabilistic HTML change model. The model captures how webpages evolve over time by looking at the likelihood of all possible changes \cite{dalvi2009a}.
+Next, we operate inside the boundary of each record in the transformed page and run a robust page-level wrapper. The wrapper is based on a tree-edit distance calculations with probabilistic HTML change model. The model captures how web pages evolve over time by looking at the likelihood of all possible changes \cite{dalvi2009a}.
 
 % To illustrate the method in action..
 [TODO] The following example illustrates sample inputs and outputs. An initial snapshot $w_{base}$ of a sample HTML document is illustrated in Figure~\ref{fig:sample-tree}. The annotated attribute node $d(w_{base})$ is marked with parenthesis. The extracted record attribute values are $\{\text{Carol}, \text{Bob}, \text{Alice}\}$.
@@ -47,7 +47,7 @@ Next, we operate inside the boundary of each record in the transformed page and 
 				[. ... ]
 			]
 		]
-	\caption{An initial $w_{base}$ (on the left) and a transformed $w_{new}$ (on the right) snapshots of a sample HTML document. Distinguished nodes marked in paranthesis.}
+	\caption{An initial $w_{base}$ (on the left) and a transformed $w_{new}$ (on the right) snapshots of a sample HTML document. Distinguished nodes marked in parentheses.}
 	\label{fig:sample-tree}
 \end{figure}
 
@@ -58,7 +58,7 @@ Next, we operate inside the boundary of each record in the transformed page and 
 % ----------------------
 \section{Core Algorithm}
 
-% TODO inputs, outpus, introduce notation and definitions
+% TODO inputs, outputs, introduce notation and definitions
 A detailed method for robust record-level wrapping is given in Algorithm~\ref{alg:prob-record-level-wrapper}. It operates on labeled ordered rooted tree structures. Thus, this is not limited to HTML documents only. The algorithm extracts a set of candidate nodes from a transformed tree, given the initial tree with a distinguished node. The inputs and outputs of the algorithm are described below.
 
 Inputs: 
@@ -72,11 +72,11 @@ Inputs:
 Outputs: 
 
 \begin{enumerate}
-	\item $\{c'_i\}$ -- A set of extracted candate nodes in a transformed tree, i.e. single attribute values of all data records, e.g. book titles.
+	\item $\{c'_i\}$ -- A set of extracted candidate nodes in a transformed tree, i.e. single attribute values of all data records, e.g. book titles.
 	%\item $c$ -- \emph{Confidence} measure, i.e. the probability measure that the wrapper did not break. This shows how accurate was the extraction.
 \end{enumerate}
 
-We assume that a distinguished node remains present in the future versions of the tree and is never deleted. The actual location of the node might change, though. For example, books listings web page in \url{amazon.com} will always contain book titles, even if the visual styling changes. This is a safe assumption, because the user annotates the tree by pointing out the content of interest. And this is typically an important piece of information, that is preserved over future (HTML document) updates. Thus, there is a single disinguished node $d(w) = \pi(d(w))$ in the new tree $w'=\pi(w)$, i.e. the node that a distinguished node $d(w)$ is mapped to by applying transformations $\pi$.
+We assume that a distinguished node remains present in the future versions of the tree and is never deleted. The actual location of the node might change, though. For example, books listings web page in \url{amazon.com} will always contain book titles, even if the visual styling changes. This is a safe assumption, because the user annotates the tree by pointing out the content of interest. And this is typically an important piece of information, that is preserved over future (HTML document) updates. Thus, there is a single distinguished node $d(w) = \pi(d(w))$ in the new tree $w'=\pi(w)$, i.e. the node that a distinguished node $d(w)$ is mapped to by applying transformations $\pi$.
 
 \IncMargin{2em}
 \begin{algorithm}[h]
@@ -106,7 +106,7 @@ We assume that a distinguished node remains present in the future versions of th
 \DecMargin{2em}
 
 % line-by-line how it works
-The Algorithm~\ref{alg:prob-record-level-wrapper} first locates the data region $dr$ in the original tree $w$ that contains the distinguished node $d(w)$ as in Line 1. In Line 2, the data records from the data region $dr$ are merged into a generalized record $r$. As tree structure might slightly vary per record, this step ensures that the base record for wrapping contains the most general template. The candidate node $c'$ is identified on Line 3. With that, on Line 4 a data region $dr'$ in the trasnformed tree $w'$ is located. Finally, each data record $r'$ from the newly found data region $w'$ is locally wrapped with a probabilistic wrapper on Line 5.
+The Algorithm~\ref{alg:prob-record-level-wrapper} first locates the data region $dr$ in the original tree $w$ that contains the distinguished node $d(w)$ as in Line 1. In Line 2, the data records from the data region $dr$ are merged into a generalized record $r$. As tree structure might slightly vary per record, this step ensures that the base record for wrapping contains the most general template. The candidate node $c'$ is identified on Line 3. With that, on Line 4 a data region $dr'$ in the transformed tree $w'$ is located. Finally, each data record $r'$ from the newly found data region $w'$ is locally wrapped with a probabilistic wrapper on Line 5.
 
 % TODO Why it works?
 % It would be nice if you could address correctness issues at some level. I would expect that proofs (formal or informal) would not be within reach, but you may add something like a discussion about what correctness means and how it can be addressed.
@@ -128,13 +128,13 @@ The Algorithm~\ref{alg:prob-record-level-wrapper} consists of three main methods
 \section{Locating Data Region Containing Node}
 
 % Why? Alternatives? 
-To enable wrapping in a web page with multiple data records, we need to locate individual data regions and run page-level wrapper inside a single region. Thus we chose \cite{liu2009a} proposed technique for data record mining. Unlike most alternatives [TODO: refs] this method supports both contiguous and non-contiguous data records, is more accurate than alternatives [TODO from Liu].
+To enable wrapping in a web page with multiple data records, we need to locate individual data regions and run page-level wrapper inside a single region. Thus we chose \cite{liu2009a} proposed technique for data record mining. Unlike most alternatives [TODO: refs] this method supports both contiguous and noncontiguous data records, is more accurate than alternatives [TODO from Liu].
 
 % TODO describe the limitation of the algo
 As long as a page contains at least two data records, the algorithm will automatically find them.
 
 % Inputs and outputs
-Given a tree with embedded data records, the Algorithm~\ref{alg:locating-data-region-containing-node} locates a data region containing a distinguished node. The inputs / outputs are desribed in detail below.
+Given a tree with embedded data records, the Algorithm~\ref{alg:locating-data-region-containing-node} locates a data region containing a distinguished node. The inputs / outputs are described in detail below.
 
 Inputs: 
 
@@ -149,8 +149,8 @@ Outputs:
 	\item $dr$ -- a data record from a tree $w$ that contains a distinguished node $v$.
 \end{enumerate}
 
-% Reasoning behild the algo.
-The algorithm is actually based on two observations. [BEGIN: dublicate] First, a group of data records have similar tree structure and are located in a close proximity. Second, these groups are under one parent node, i.e. it is very unlikely that a single record would begin inside one child subtree and end inside another child subtree. [END]
+% Reasoning behind the algo.
+The algorithm is actually based on two observations. [BEGIN: duplicate] First, a group of data records have similar tree structure and are located in a close proximity. Second, these groups are under one parent node, i.e. it is very unlikely that a single record would begin inside one child subtree and end inside another child subtree. [END]
 
 
 % TODO algo definition itself
@@ -185,7 +185,7 @@ The algorithm is actually based on two observations. [BEGIN: dublicate] First, a
 The detailed description of the method for locating a data region with a node is given in Algorithm~\ref{alg:locating-data-region-containing-node}. First, we locate all data regions per tree in Line 1. We make a call to Mining Data Records (MDR) algorithm as described in \cite{liu2009a}. This returns a set of all data regions found, not just the ones of interest. In lines 2-7 we iterate through all data regions and trees inside those regions, to locate the data record of interest. Finally, we return a data record with a node of interest.
 
 % Original MDR shortcomings
-In MDR, Liu et al. \cite{liu2009a} use string edit-distance for comparing child sub-trees. MDR traverses the tree from the root downward in a depth-first fashion. At each node, a  comparison of various combinations of the children sub-trees is performed. While this method is efficient (runtime complexity of $O(|s_1||s_2|)$, it is not accurate for text intensive web pages. As an example, consider two paragraphs with different text inside. String-wise these two are very different, yet the tree structure is identical (\texttt{<P>} element has a single child element \texttt{TEXT}).
+In MDR, Liu et al. \cite{liu2009a} use string edit-distance for comparing child subtrees. MDR traverses the tree from the root downward in a depth-first fashion. At each node, a  comparison of various combinations of the children subtrees is performed. While this method is efficient (runtime complexity of $O(|s_1||s_2|)$, it is not accurate for text intensive web pages. As an example, consider two paragraphs with different text inside. String-wise these two are very different, yet the tree structure is identical (\texttt{<P>} element has a single child element \texttt{TEXT}).
 
 % TODO: Zheng
 - string edit distance is not suitable for this step as a string does not consider the tree structure, which is very useful in determining the correct alignment of data items.
@@ -204,14 +204,14 @@ formulations have complexities above quadratic [10]. It has also
 been shown that if the trees are not ordered, the problem is NP-
 complete [36]. In [30], a solution based on dynamic programming
 is presented. The algorithm has a complexity of O(n 1 n 2 h 1 h 2 ),
-where n 1 and n 2 are the sizes of the trees and h 1 and h 2 are heights
+where n 1 and n 2 are the sizes of the trees and h1 and h2 are heights
 of the trees. In [32][10], two other algorithms are also presented
 with similar complexities.
 
 [TODO] Pawlik and Augsten \cite{pawlik2011a} show that the efficiency of the previous solutions for the tree edit distance heavily depends on the tree shape and run into their worst cases for some data instances. They generalize the previous approaches and develop a new algorithm with O(n3) time (with n>m) and O(mn) space complexity. Their solution efficient for all tree shapes and never runs in the worst case if a better solution exists.
 
 % Other params and optimizations
-And also other optimiztions for our particular use-case: MAX-NUMBER-OF-TAGS-PER-GENERALIZED-NODE, EDIT-DISTANCE-THRESHOLD, areTableRows, substantiallyDifferentFrom
+And also other optimizations for our particular use-case: MAX-NUMBER-OF-TAGS-PER-GENERALIZED-NODE, EDIT-DISTANCE-THRESHOLD, areTableRows, substantiallyDifferentFrom
 
 % Complexity analysis O(N)
 $O(N K)$ plus the complexity of tree comparison which is $O(n^3)$
@@ -271,7 +271,7 @@ Outputs:
 Line 1 initializes the template with the first tree. Line 2 iterates through each tree to be merged and merges template with each tree pairwise. Line 3 evaluates similarity of two trees by producing the maximum matching matrix $m$ through dynamic programming. Line 4 aligns the nodes from the two trees by tracing back in the matrix $m$. Line 5 locates the unaligned vertices $u$ from a tree $t$. These vertices are inserted into a template in Line 6.
 
 % what's different from Zhai
-The Algorithm~\cite{alg:merging-data-records} is a variation of \emph{PartialTreeAlignment} by Zhai \cite{zhai2005a}. Methods \texttt{SimpleTreeMatch}, \texttt{FindUnalignedNodes}, \texttt{InsertIntoSeed} and \texttt{AlignTrees} are used from Zhai's work. An important distinction is the way these methods are composed. Unlike Zhai, we do not repeatedly try to match unaligned items with the template. We cannot allow any abiguity in the template, as it would impose undesired differences between template and data records in future wrapping. For example, adding unaligned node at a wrong position in the template would add additional edit cost of removing the node between two trees.
+The Algorithm~\cite{alg:merging-data-records} is a variation of \emph{PartialTreeAlignment} by Zhai \cite{zhai2005a}. Methods \texttt{SimpleTreeMatch}, \texttt{FindUnalignedNodes}, \texttt{InsertIntoSeed} and \texttt{AlignTrees} are used from Zhai's work. An important distinction is the way these methods are composed. Unlike Zhai, we do not repeatedly try to match unaligned items with the template. We cannot allow any ambiguity in the template, as it would impose undesired differences between template and data records in future wrapping. For example, adding unaligned node at a wrong position in the template would add additional edit cost of removing the node between two trees.
 
 % Complexity analysis O(N)
 [TODO]
@@ -279,7 +279,7 @@ In this method, a sequence x c that minimizes ($D(x_i, x_c)$ is the distance of 
 is selected as the center. Then a pair-wise alignment is performed
 for each pair $(x_i, x_c)$, where $i != c$. Assuming there are $k$ sequences
 and all sequences have length n, finding the center takes $O(k 2 n 2 )$
-time and each step of the iterative pair-wise alignment takes $O(n 2 )$
+time and each step of the iterative pairwise alignment takes $O(n 2 )$
 time. Therefore the overall time cost is $O(k 2 n 2 )$.
 
 [TODO Zheng 05] STM evaluates the similarity of two trees by producing the maximum matching through dynamic programming with complexity O(n 1 n 2 ), where n 1 and n 2 are the sizes of trees A and B respectively.
@@ -293,7 +293,7 @@ In the final step of the core Algorithm~\ref{alg:prob-record-level-wrapper}, a t
 nd thus have weak confidence estimation.
 
 % Inputs and outputs
-Given an initial tree with a distinguished node, the Algorithm~\ref{alg:optimal-probabilistic-wrapper} locates the most probable candidate node in a transformed tree. This method calculates transformation probabilities for each candidate node and returns the one with the highest chance. The procedure precalculates probabilities for subtrees and thus later candidate iteration is not expensive.
+Given an initial tree with a distinguished node, the Algorithm~\ref{alg:optimal-probabilistic-wrapper} locates the most probable candidate node in a transformed tree. This method calculates transformation probabilities for each candidate node and returns the one with the highest chance. The procedure pre-calculates probabilities for subtrees and thus later candidate iteration is not expensive.
 
 Inputs: 
 
@@ -348,7 +348,7 @@ Outputs:
 In the description of Algorithm~\ref{alg:optimal-probabilistic-wrapper}, we use notation $T_v$ to note the tree under the node $v$, $P_1v$ to note all nodes in the tree that are to its left from node $v$ or to the left of its ancestors in some tree $w$, and $P_2$ to note the tree $w - T_v - P_1$.
 
 % step-by-step
-In the Algorithm~\ref{alg:optimal-probabilistic-wrapper}, the core function is $TP$, which calculates the probability of transforming one tree to another \cite{dalvi2009a}. It uses change model and tree-edit cost calculcations to perform the task. Lines 1-4 precalculcates probabilities of transforming prefix trees for all nodes. Lines 5-7 also precalcultes probabilities, but for transforming $P_2$ to complete subtrees in $w'$. Lines 9-11 precalcultes probabilities of prefix of $z$ in tree $P_2$ to tree $P'_2$. Final probability of transforming $P_2$ to $P'_2$ is calculated by Line 12. All of precalculated probabilities are multiplied in Line 13 to calculate the probability of $u$ being mapped to $v$. Finally, Line 15 returns the node $v$ with the highest probability.
+In the Algorithm~\ref{alg:optimal-probabilistic-wrapper}, the core function is $TP$, which calculates the probability of transforming one tree to another \cite{dalvi2009a}. It uses change model and tree-edit cost calculations to perform the task. Lines 1-4 pre-calculates probabilities of transforming prefix trees for all nodes. Lines 5-7 also pre-calculates probabilities, but for transforming $P_2$ to complete subtrees in $w'$. Lines 9-11 pre-calculates probabilities of prefix of $z$ in tree $P_2$ to tree $P'_2$. Final probability of transforming $P_2$ to $P'_2$ is calculated by Line 12. All of precalculated probabilities are multiplied in Line 13 to calculate the probability of $u$ being mapped to $v$. Finally, Line 15 returns the node $v$ with the highest probability.
 
 % rewrite in own words
 [TODO Talk about TP and its importance.]

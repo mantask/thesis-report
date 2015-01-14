@@ -2,7 +2,7 @@
 \label{ch:implementation}
 
 
-The chapter introduces core design decisions in terms of components, data structures and algorithms. It also discuses the reasoning behind choices made, alternatives and tradeofs.
+The chapter introduces core design decisions in terms of components, data structures and algorithms. It also discuses the reasoning behind choices made, alternatives and tradeoffs.
 
 
 % -----------------------
@@ -28,7 +28,7 @@ There are three essential classes that represent a graph (see Figure~\ref{fig:pa
 
 \paragraph{Tree} The \texttt{Tree} class stores current root node and a pointer to each of its subtrees. The class enables to select different parts of the tree for many of its use cases: \texttt{children()}, \texttt{child()}, \texttt{tail()}, \texttt{prefix()}, \texttt{subforest()}, \texttt{subtree()}. Due to its hierarchical structure, the most of methods in the class are recursive. A tree comparison heuristics is implemented in \texttt{substantiallyDifferentFrom()} method, which compares the node count of two trees.
 
-\paragraph{Forest} Some operations on trees, e.g. \texttt{tail()}, return a disjoint set of trees. These are grouped under a \texttt{Forest} class. It also adds convinience methods for manipulating the forest: \texttt{removeRightmostTree()} and \texttt{removeRightmostRoot()}. It is important to note that the data structure is immutable, and all edit oprations return a new instance of a \texttt{Forest}. This helps to avoid state management.
+\paragraph{Forest} Some operations on trees, e.g. \texttt{tail()}, return a disjoint set of trees. These are grouped under a \texttt{Forest} class. It also adds convenience methods for manipulating the forest: \texttt{removeRightmostTree()} and \texttt{removeRightmostRoot()}. It is important to note that the data structure is immutable, and all edit operations return a new instance of a \texttt{Forest}. This helps to avoid state management.
 
 \paragraph{TreeUtils} Tree structure comparison is extracted as an utility method in \texttt{TreeUtils} class. This approach was chosen over \texttt{equals()} method inside the \texttt{Tree} class, in order not to break a key inside key-value collections through \texttt{hashCode()} method.
 
@@ -57,7 +57,7 @@ Data region locator logic is grouped in the \texttt{region} package (see Figure~
 
 \paragraph{DataRegion} The \texttt{DataRegion} class contains a set of data records (i.e. \texttt{Forest} classes) and a position index from its parent node in a tree. The method \texttt{isCoveredBy()} checks whether two data regions overlap. The other methods are getters for accessing various pieces of data records.
 
-\paragraph{DataRegionLocator} The \texttt{DataRegionLocator} logic is split across three private methods: \texttt{calcCombinations()}, \texttt{findDataRegions()}, and \texttt{identifyDataRecords()}. These basically implement the Algorithm~\ref{alg:locating-data-region-containing-node} directly. Yet there are a few custom heuristics and optimizations. First, we limit a number of nodes per data record to 3 to reduce the search space. Next, we limit edit-distance calculations for trees that are not substantially different. Finally, we use RTED library from \cite{pawlik2011a} to compute tree edit-distance instead of Lavenshtein distance for string edit-distance.
+\paragraph{DataRegionLocator} The \texttt{DataRegionLocator} logic is split across three private methods: \texttt{calcCombinations()}, \texttt{findDataRegions()}, and \texttt{identifyDataRecords()}. These basically implement the Algorithm~\ref{alg:locating-data-region-containing-node} directly. Yet there are a few custom heuristics and optimizations. First, we limit a number of nodes per data record to 3 to reduce the search space. Next, we limit edit-distance calculations for trees that are not substantially different. Finally, we use RTED library from \cite{pawlik2011a} to compute tree edit-distance instead of Levenshtein distance for string edit-distance.
 
 \paragraph{DiffsToNextGeneralizedNode} The \texttt{DiffsToNextGeneralizedNode} is a convenience data structure for two dimensional array access.
 
@@ -79,13 +79,13 @@ We don't learn a probabilistic model of change from web page archive. We assume 
 \end{figure}
 
 % entities
-The core logic is in the \texttt{ProbabilisticTransducer} class. The probabilities of HTML tag modification is stored in a \texttt{ProbabilisticChangeModel} data structure. \texttt{TransformationProbabilities} class acts as a cache to store transformation probabilities for trees. \texttt{NumberUtils} is a helper class for floatating point calculations.
+The core logic is in the \texttt{ProbabilisticTransducer} class. The probabilities of HTML tag modification is stored in a \texttt{ProbabilisticChangeModel} data structure. \texttt{TransformationProbabilities} class acts as a cache to store transformation probabilities for trees. \texttt{NumberUtils} is a helper class for floating point calculations.
 
 % behaviour for each entity
 
 \paragraph{ProbabilisticChangeModel} The class \texttt{ProbabilisticChangeModel} is a data structure for storing insert, delete and substitute probabilities of various HTML tags. It contains getters and setters for probabilities. The method \texttt{valid()} checks, if sum of all probabilities is $1.0$ and other rules hold. This is helpful for validating data input, as change models are loaded but not learned by our implementation.
 
-\paragraph{TransformationProbabilities} After calculating the chance of one tree being transformed into another tree, we store the probability in a cache, i.e. \texttt{TransformationProbabilities} class. This class acts as an in-memory key-value storage. By caching the probabilities, we reduce the amount of caculation in recursive $TP$ calls in Algorith~\ref{alg:prob-record-level-wrapper}.
+\paragraph{TransformationProbabilities} After calculating the chance of one tree being transformed into another tree, we store the probability in a cache, i.e. \texttt{TransformationProbabilities} class. This class acts as an in-memory key-value storage. By caching the probabilities, we reduce the amount of calculation in recursive $TP$ calls in Algorithm~\ref{alg:prob-record-level-wrapper}.
 
 \paragraph{ProbabilisticTransducer} The class \texttt{ProbabilisticTransducer} calculates a probability of transforming original tree into transformed one in \texttt{prob()} method. The method is provided with a number of convenience interfaces. The implementation adds a performance optimization for substantially different trees and a caching strategy for repeat tree comparison.
 
@@ -113,7 +113,7 @@ The class \texttt{ProbabilisticPageLevelWrapper} finds the single most probable 
 
 % behaviour for each entity
 
-\paragraph{ProbabilisticPageLevelWrapper} The class \texttt{ProbabilisticPageLevelWrapper} initializes with an initial tree, distinguished node and a change model. Later it can wrap multple transformed trees. The method \texttt{wrap()} iterations through candidate nodes and returns the most probable one. It's a direct implementation of Algorithm~\ref{alg:optimal-probabilistic-wrapper}.
+\paragraph{ProbabilisticPageLevelWrapper} The class \texttt{ProbabilisticPageLevelWrapper} initializes with an initial tree, distinguished node and a change model. Later it can wrap multiple transformed trees. The method \texttt{wrap()} iterations through candidate nodes and returns the most probable one. It's a direct implementation of Algorithm~\ref{alg:optimal-probabilistic-wrapper}.
 
 \paragraph{ProbabilisticRecordLevelWrapper} The class \texttt{ProbabilisticRecordLevelWrapper} implements the Algorithm~\ref{alg:prob-record-level-wrapper}. As \texttt{ProbabilisticPageLevelWrapper}, this class is first initialized with initial tree and a distinguished node, and later can wrap transformed trees multiple times. 
 
@@ -141,7 +141,7 @@ Our wrapper uses internal tree data structures. In order for the implementation 
 
 \paragraph{ProbabilisticChangeModelFactory} The class \texttt{ProbabilisticChangeModelFactory} reads a comma separated file into memory.
 
-\paragraph{HtmlTreeFactory} The class \texttt{HtmlTreeFactory} maps DOM tree node by node into local tree data structure. Only emlement and text nodes are mapped, ignoring attributes, comments, CDATA, etc. nodes.
+\paragraph{HtmlTreeFactory} The class \texttt{HtmlTreeFactory} maps DOM tree node by node into local tree data structure. Only element and text nodes are mapped, ignoring attributes, comments, CDATA, etc. nodes.
 
 
 % vim:wrap linebreak nolist:
