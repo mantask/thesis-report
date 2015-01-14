@@ -268,7 +268,7 @@ Outputs:
 \DecMargin{2em}
 
 % step-by-step
-Line 1 initializes the template with the first tree. Line 2 iterates through each tree to be merged and merges template with each tree pairwise. Line 3 evaluates similarity of two trees by producing the maximum matching matrix $m$ through dynamic programming. Line 4 aligns the nodes from the two trees by tracing back in the matrix $m$. Line 5 locates the unaligned vertexes $u$ from a tree $t$. These vertexes are inserted into a template in Line 6.
+Line 1 initializes the template with the first tree. Line 2 iterates through each tree to be merged and merges template with each tree pairwise. Line 3 evaluates similarity of two trees by producing the maximum matching matrix $m$ through dynamic programming. Line 4 aligns the nodes from the two trees by tracing back in the matrix $m$. Line 5 locates the unaligned vertices $u$ from a tree $t$. These vertices are inserted into a template in Line 6.
 
 % what's different from Zhai
 The Algorithm~\cite{alg:merging-data-records} is a variation of \emph{PartialTreeAlignment} by Zhai \cite{zhai2005a}. Methods \texttt{SimpleTreeMatch}, \texttt{FindUnalignedNodes}, \texttt{InsertIntoSeed} and \texttt{AlignTrees} are used from Zhai's work. An important distinction is the way these methods are composed. Unlike Zhai, we do not repeatedly try to match unaligned items with the template. We cannot allow any abiguity in the template, as it would impose undesired differences between template and data records in future wrapping. For example, adding unaligned node at a wrong position in the template would add additional edit cost of removing the node between two trees.
