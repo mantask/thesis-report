@@ -1,5 +1,0 @@
-go through section-by-section
-	§4.1 Provide a detailed step-by-step example.
-	references to implementation
-	Conclusion
-redraw charts

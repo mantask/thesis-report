@@ -19,8 +19,11 @@ In this paper, we have introduced an idea of using a robust probabilistic wrappe
 % what was good
 With our wrapper design, we have been able to achieve the objectives as described in Section~\ref{sec:contribution}. First, our record-level wrapper initializes from a single snapshot of a web page. Second, the experiment has proved the wrapper to be robust, with accuracy around $70\%$. Finally, the execution time of our algorithm has been reasonable with real world web pages, i.e. under $2$ seconds.
 
+% Design work done
+A number of design choices have been investigated, most notably: lightweight tree structures have been modeled, tree-edit distance metric has been introduced in data record mining, repeated matching has been discarded in partial tree alignment method, probability caching has been used to optimize probabilistic transducer (TP), etc.  Furthermore, a number of heuristics have been developed: a limit for root data record nodes, metric of significant differences between two trees, edit-distance thresholds, etc.
+
 % what went wrong
-Although we have been able to prove that our concept is viable, the accuracy measures were not as high as we expected. In our design, we have been balancing between accuracy and performance. And we have intentionally parametrized our algorithm for future tuning. 
+Although we have been able to prove that our concept is viable, the accuracy measures were not as high as we expected. In our design, we have been balancing between accuracy and performance. A perfect balance is yet to be found with more elaborate test coverage. Given limited time, we have not been able to prepare extensive test suite with many edge cases. To support further work, we have parametrized our implementation with variables for tuning (see class \texttt{Config} in Section~\ref{sec:Config}).
 
 
 % -------------------
@@ -28,9 +31,9 @@ Although we have been able to prove that our concept is viable, the accuracy mea
 \label{sec:future-work}
 % what does this project leads to? What is missing? What next?
 
-As part of the future work, the algorithm could exploit not only the structure, but also the content of web pages by recognizing and matching patterns as described in \ref{lerman2003a} or \ref{Chidlovskii:2006:DES:1142473.1142555}. This should improve the overall accuracy of wrapping.
+As part of the future work, the algorithm could exploit not only the structure, but also the content of web pages by recognizing and matching patterns as described in \cite{lerman2003a} or \cite{Chidlovskii:2006:DES:1142473.1142555}.
 
-As a second direction for extension, data region locator could try to merge two or more regions with similar data record structure. This would significantly improve non-contiguous region handling and accuracy.
+As a second direction for extension, data region locator could try to merge two or more regions with similar data record structure. This would significantly improve non-contiguous region handling.
 
 Finally, the change model could be improved during the process of wrapping. In other words, after wrapping the next web page, the probabilities of probabilistic transducer could be updated.
 

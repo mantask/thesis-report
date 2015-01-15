@@ -15,7 +15,13 @@ To illustrate the principles, we use a deliberately simple example from Figure~\
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1.0\textwidth]{figures/algorithm}
-	\caption{Visualization of record-level wrapping steps.}
+	\caption{
+		Visualization of record-level wrapping steps.
+		(a) Locate data region with a distinguished node.
+		(b) Merge data records into a template tree.
+		(c) Use a probabilistic page-level wrapper to locate a position of a distinguished node in a new snapshot. Also identify data regions.
+		(d) For each data record found, run the page-level wrapper and extract the information.
+	}
 	\label{fig:algorithm}
 \end{figure}
 
@@ -25,35 +31,7 @@ The main idea of the new method is to split the wrapping process into two steps.
 Next, we operate inside the boundary of each record in the transformed page and run a robust page-level wrapper. The wrapper is based on a tree-edit distance calculations with probabilistic HTML change model. The model captures how web pages evolve over time by looking at the likelihood of all possible changes \cite{dalvi2009a}.
 
 % To illustrate the method in action..
-The following example illustrates sample inputs and outputs. An initial snapshot $w_{base}$ of a sample HTML document is illustrated in Figure~\ref{fig:sample-tree}. The annotated attribute node $d(w_{base})$ is marked with parenthesis. The extracted record attribute values are $\{\text{Carol}, \text{Bob}, \text{Alice}\}$.
-% TODO step-by-step with given example
-% TODO Consider a transformed tree from Fig.~xx
-
-\begin{figure}[h]
-	\centering
-	\Tree [.table 
-			[.tr 
-				[.td [.img ] ]
-				[.td 
-					[.a
-						[.\textit{How to Build...} ]
-					]
-					[.a
-						[.\textit{George...} ]
-					]
-					[.span 
-						[.\textit{Hardcover} ]
-					]
-					[. ... ]
-				]
-			]
-			[.tr 
-				[. ... ]
-			]
-		]
-	\caption{An initial $w_{base}$ (on the left) and a transformed $w_{new}$ (on the right) snapshots of a sample HTML document. Distinguished nodes marked in parentheses.}
-	\label{fig:sample-tree}
-\end{figure}
+The following example illustrates sample inputs and outputs. An initial snapshot $w_{base}$ of a sample HTML document is illustrated in Figure~\ref{fig:amazon-books-tree}. Let's assume, that the annotated attribute node $d(w_{base})$ is \texttt{TEXT} element with content \emph{"How To Build a Million Dollar App.."}. The wrapper is expected to extract the following titles \emph{"How to Build a Billion Dollar App ..."}, \emph{"The Hard Thing About Hard Things ..."}, \emph{"The Google Story"}, \emph{"In The Plex: How Google Thinks, Works ..."}.
 
 
 % ----------------------
