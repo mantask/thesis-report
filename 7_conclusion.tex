@@ -8,19 +8,19 @@
 \section{Summary}
 % What was the idea and what was done
 
-In this paper, we introduced an idea of using a robust probabilistic wrapper for multiple data records extraction. We combined state-of-the-art web wrapping and data record mining methods into a coherent framework for robust record-level wrapping. As part of the project, we designed an algorithm, implemented it in Java, and tested it with real world data sets.
+In this paper, we have introduced an idea of using a robust probabilistic wrapper for multiple data records extraction. We have combined state-of-the-art web wrapping and data record mining methods into a coherent framework for robust record-level wrapping. As part of the project, we have designed an algorithm, implemented it in Java, and tested it with real world data sets.
 
 
 %-------------------
 \section{Discussion}
 % what was good/not so good, what could be done differently, was the goals met?
-
-With our wrapper design, we were able to achieve the objectives as described in Section~\ref{sec:contribution}. First, our record-level wrapper initializes from a single snapshot of a web page. Second, the experiment proved the wrapper to be robust, with accuracy around $70\%$. Finally, the execution time of our algorithm was reasonable with real world web pages, i.e. under $2$ seconds.
-
-% TODO what went wrong or succeeded
 % A test of the coherence of the Introduction and Conclusion is that after reading just these two chapters, the reader has a good idea about the purpose, ideas, goals, approach, status and results of the thesis. Perhaps the conclusion could refer more explicitly to particular goals.
 
-Although we were able to prove that our concept is viable, the accuracy measures were not as high as we expected. [TODO]
+% what was good
+With our wrapper design, we have been able to achieve the objectives as described in Section~\ref{sec:contribution}. First, our record-level wrapper initializes from a single snapshot of a web page. Second, the experiment has proved the wrapper to be robust, with accuracy around $70\%$. Finally, the execution time of our algorithm has been reasonable with real world web pages, i.e. under $2$ seconds.
+
+% what went wrong
+Although we have been able to prove that our concept is viable, the accuracy measures were not as high as we expected. In our design, we have been balancing between accuracy and performance. And we have intentionally parametrized our algorithm for future tuning. 
 
 
 % -------------------
@@ -28,9 +28,9 @@ Although we were able to prove that our concept is viable, the accuracy measures
 \label{sec:future-work}
 % what does this project leads to? What is missing? What next?
 
-As part of the future work, the algorithm could exploit not only the structure, but also the content of web pages by recognizing and matching patterns as suggested in [TODO ref]. This should improve the overall accuracy of wrapping.
+As part of the future work, the algorithm could exploit not only the structure, but also the content of web pages by recognizing and matching patterns as described in \ref{lerman2003a} or \ref{Chidlovskii:2006:DES:1142473.1142555}. This should improve the overall accuracy of wrapping.
 
-As a second direction for extension, data region locator could try to merge two or more regions with similar data record structure. This would significantly improve non-contiguous region handling and overall accuracy of wrapping.
+As a second direction for extension, data region locator could try to merge two or more regions with similar data record structure. This would significantly improve non-contiguous region handling and accuracy.
 
 Finally, the change model could be improved during the process of wrapping. In other words, after wrapping the next web page, the probabilities of probabilistic transducer could be updated.
 

@@ -1,5 +1,5 @@
 go through section-by-section
+	§4.1 Provide a detailed step-by-step example.
+	references to implementation
+	Conclusion
 redraw charts
-add more references
-what can be added as Appendex? Source code?
-add more charts and examples to grow page count to a more decent 45+ count

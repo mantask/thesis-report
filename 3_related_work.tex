@@ -6,13 +6,13 @@
 % What is the main idea? What is the contribution (the new or interesting thing)? What is important for you? Where it is presented?
 
 % Gist + My comment
-% TODO: go through each paper and make short notes on what's important and why.
 
 The method presented in this paper builds upon the previous work on wrapper induction, HTML aware data extraction, probabilistic tree-edit distance measures, and data record mining. The most influential ideas are covered in this chapter.
 
 
 % ---------------------------------------------------------------------
 \section{Wrapper Induction Method Overview}
+\label{sec:wrapper-induction}
 % discuss classification and state our focus
 
 The problem of data extraction, especially from web pages, has been addressed in a number of papers. Laender et al. \cite{Laender:2002:BSW:565117.565137} group wrapping techniques into multiple categories, including natural language processing, languages and grammar, machine learning, information retrieval, databases, and ontologies. A common goal of all wrapper generation tools is to build a wrapper that is both accurate and robust, but is built with the least possible human interaction. The article provides a taxonomy for grouping wrapping techniques.
@@ -36,6 +36,7 @@ Zhai and Liu \cite{zhai2005a} report, that there are two main methods for data r
 
 % ---------------------------------------------------------------------
 \section{HTML Aware Data Extraction}
+\label{sec:html-aware-data-extraction}
 % elaborate on the research in the area of our focus
 
 % IBM Report: Robust Web Data Extraction with XML Path Expressions
@@ -58,10 +59,10 @@ Thomsen et al. \cite{Thomsen:2012:WWS:2364120.2364156} present a framework that 
 \label{sec:tree-edit-distance}
 
 % A Survey on Tree Edit Distance and Related Problems
-In a recent survey on tree-edit distance problem by Bille \cite{bille2005a} a number of solutions are overviewed. While it has been shown that edit distance problem is NP-complete for unordered trees, for ordered trees dynamic programming algorithms exist. Several algorithms have been proposed, among them Shaha and Zhang \cite{shasha1990a} and Demaine et al. \cite{demaine2007a} with time complexity of $O(m^2 n^2)$ and $O(n^ 2m(1+\log_m n))$  for trees with $m$ and $n$ nodes respectively. The efficiency of the two algorithms heavily depends on the tree shape and it is hard to chose between them. 
+In a recent survey on tree-edit distance problem by Bille \cite{bille2005a} a number of solutions are overviewed. While it has been shown that edit distance problem is NP-complete for unordered trees, for ordered trees dynamic programming algorithms exist, all with time complexities above quadratic. Several algorithms have been proposed, among them Shaha and Zhang \cite{shasha1990a} and Demaine et al. \cite{demaine2007a} with time complexity of $O(m^2 n^2)$ and $O(n^ 2m(1+\log_m n))$  for trees with $m$ and $n$ nodes respectively. The efficiency of the two algorithms heavily depends on the tree shape and it is hard to chose between them. 
 
 % RTED - A Robust Algorithm for the Tree Edit Distance
-Addressing this problem, a robust algorithm \emph{RTED} has been proposed by Pawlik and Augsten \cite{pawlik2011a}. \emph{RTED} is not only tree-shape independent, but for any problem instance computes as many relevant subproblems as the best competitor must compute. \emph{RTED} runs in $O(n^3)$ time and in many cases outperforms the competitors. Moreover, the authors provide a Java library for use in own projects. Thus, we use \emph{RTED} in our data record mining algorithm.
+Addressing this problem, a robust algorithm RTED has been proposed by Pawlik and Augsten \cite{pawlik2011a}. RTED is not only tree-shape independent, but for any problem instance computes as many relevant subproblems as the best competitor must compute. RTED runs in $O(n^3)$ time (where $n$ is the size of the first tree) and in many cases outperforms the competitors. Moreover, the authors provide a Java library for use in own projects. Thus, we use RTED in our data record mining algorithm.
 
 % Automatic web news extraction using tree edit distance by Reis'04
 Alternatively, a number of restricted tree-edit distance algorithms exists. For example, in \cite{de2004a} Reis et al. introduce a \emph{Restricted Top-Down Mapping} algorithm, which calculates edit-tree distance by efficiently analysing tree structure. Generally, the algorithm imposes top-down mappings which allow removal and inserts at the bottom of the tree only. It is based on assumption that just the content at the bottom of the elements changes. We discard these algorithm variations as too focused on edge cases and not suitable for a general use-case.
@@ -95,6 +96,7 @@ We could not find alternative formal definitions of wrapper robustness that took
 
 % ---------------------------------------------------------------------
 \section{Data Record Mining}
+\label{sec:data-record-mining}
 
 % Data record mining
 Liu et al. \cite{liu2009a} propose a \emph{Mining Data Records} (MDR) algorithm for automatically locating data records in web pages. In other words, MDR finds page regions generated by a template. The method is based on (1) string edit distance algorithm to find data records and (2) two observations about data records in an HTML document. First, a group of data records have similar tree structure and are located in a close proximity. Second, these groups are under one parent node, i.e. it is very unlikely that a single record would begin inside one child subtree and end inside another child subtree. The algorithm works both with continuous and noncontinuous data regions. 
@@ -110,7 +112,7 @@ Building on Liu et al. work \cite{liu2009a}, Zhai and Liu further develops the i
 Similarly, in \cite{zheng2007a} the DOM tree is progressively converted into a generic page-level wrapper tree. A cost-driven dynamic programming is employed for the alignment algorithm. The issue with this approach is that tree-mapping operations are expensive. Zheng et al. further develop tree alignment idea \cite{DBLP:conf/cikm/ZhengSWG09} and introduce a concept of \emph{broom} structure, which effectively is a generalized tree for record wrapping by alignment. Basically, the template is reconstructed from multiple HTML fragments. By restricting alignment to relevant DOM regions, the tree alignment cost is reduced dramatically. It also handles case of cross records and uses content matching for improved record extraction.
 
 % discussion
-Both of the aforementioned tree alignment techniques present an interesting idea in record-level wrapping. They both try to reconstruct the template by generalizing multiple records into a generic template tree. We further explore this idea in our wrapper design.
+Both of the aforementioned tree alignment techniques present an interesting idea in record-level wrapping. They both try to reconstruct the template by generalizing multiple records into a generic template tree. We further explore this idea in our wrapper design (see Section~\ref{sec:merging-data-records}).
 
 
 % vim:wrap linebreak nolist:

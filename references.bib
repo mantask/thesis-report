@@ -358,4 +358,57 @@
   abstract = {The edit distance between two ordered rooted trees with vertex labels is the minimum cost of transforming one tree into the other by a sequence of elementary operations consisting of deleting and relabeling existing nodes, as well as inserting new nodes. In this paper, we present a worst-case 0(n3)-time algorithm for this problem, improving the previous best O(n3 log n)-time algorithm (P.N. Klein, 1998). Our result requires a novel adaptive strategy for deciding how a dynamic program divides into subproblems, together with a deeper understanding of the previous algorithms for the problem. We prove the optimality of our algorithm among the family of decomposition strategy algorithms— which also includes the previous fastest algorithms—by tightening the known lower bound of Ω(n2 log2 n) [4] to Ω(n3), matching our algorithm's running time. Furthermore, we obtain matching upper and lower bounds of Θ(nm2(l + log n/m)) when the two trees have sizes m and n where m < n.}
 }
 
+@article{buttler2001a,
+  title = {A fully automated object extraction system for the World Wide Web},
+  language = {English},
+  publisher = {IEEE COMPUTER SOC},
+  author = {Buttler, D. and Liu, L. and Pu, C.},
+  journal = {21ST INTERNATIONAL CONFERENCE ON DISTRIBUTED COMPUTING SYSTEMS, PROCEEDINGS},
+  pages = {361-370},
+  year = {2001},
+  issn = {10636927},
+  isbn = {0769510779},
+  abstract = {This paper presents a fully automated object extraction system - Omini. A distinct feature of Omini is the suite of algorithms and the automatically learned information extraction rules for discovering and extracting objects from dynamic Web pages or static Web pages that contain multiple object instances. We evaluated the system using more than 2,000 Web pages over 40 sites. It achieves 100% precision (returns only correct objects) and excellent recall (between 99% and 98%, with very few significant objects left out). The object boundary identification algorithms are fast, about 0.1 second per page with a simple optimization.}
+}
+
+@article{csie2009a,
+  title = {IEPAD: Information Extraction Based on Pattern Discovery Chia-Hui Chang},
+  language = {English},
+  author = {Csie, Tel Chia and Chang, Chia-hui},
+  year = {2009},
+  abstract = {The research in information extraction (IE) regards the generation of wrappers that can extract particular information from semistructured Web documents. Similar to compiler generation, the extractor is actually a driver program, which is accompanied with the generated extraction rule. Previous work in this field aims to learn extraction rules from users&apos; training example. In this paper, we propose IEPAD, a system that automatically discovers extraction rules from Web pages. The system can automatically identify record boundary by repeated pattern mining and multiple sequence alignment. The discovery of repeated patterns are realized through a data structure call PAT trees. Additionally, repeated patterns are further extended by pattern alignment to comprehend all record instances. This new track to 1E involves no human effort and content-dependent heuristics. Experimental results show that the constructed extraction rules can achieve 97 percent extraction over fourteen popular search engines.}
+}
+
+@article{jiang2009a,
+  title = {Record-Boundary Discovery In Web Documents},
+  language = {English},
+  author = {Jiang, Yuan},
+  year = {2009},
+  abstract = {Extraction of information from unstructured or semistructured Web documents often requires a recognition and delimitation of records. (By \&quot;record\&quot; we mean a group of information relevant to some entity.) Without first chunking documents that contain multiple records according to record boundaries, extraction of record information will not likely succeed. In this thesis we describe a heuristic approach to discovering record boundaries in Web documents. In our approach, we capture the structure of a document as a tree of nested HTML tags, locate the subtree containing the records of interest, identify candidate separator tags within the subtree using five independent heuristics, and select a consensus separator tag based on a combined heuristic. Our approach is fast (runs linearly for practical cases within the context of the larger data-extraction problem) and accurate (100\% in the...}
+}
+
+@article{lerman2004a,
+  title = {Using the structure of web sites for automatic segmentation of tables},
+  language = {eng},
+  author = {Lerman, Kristina and Getoor, Lise and Minton, Steven and Knoblock, Craig},
+  journal = {Proceedings of the Acm Sigmod International Conference on Management of Data, Proc Acm Sigmod Int Conf Manage Data},
+  pages = {119-130},
+  year = {2004},
+  issn = {07308078},
+  abstract = {Many Web sites, especially those that dynamically generate HTML pages to display the results of a user's query, present information in the form of list or tables. Current tools that allow applications to programmatically extract this information rely heavily on user input, often in the form of labeled extracted records. The sheer size and rate of growth of the Web make any solution that relies primarily on user input is infeasible in the long term. Fortunately, many Web sites contain much explicit and implicit structure, both in layout and content, that we can exploit for the purpose of information extraction. This paper describes an approach to automatic extraction and segmentation of records from Web tables. Automatic methods do not require any user input, but rely solely on the layout and content of the Web source. Our approach relies on the common structure of many Web sites, which present information as a list or a table, with a link in each entry leading to a detail page containing additional information about that item. We describe two algorithms that use redundancies in the content of table and detail pages to aid in information extraction. The first algorithm encodes additional information provided by detail pages as constraints and finds the segmentation by solving a constraint satisfaction problem. The second algorithm uses probabilistic inference to find the record segmentation. We show how each approach can exploit the web site structure in a general, domain-independent manner, and we demonstrate the effectiveness of each algorithm on a set of twelve Web sites.}
+}
+
+@article{lerman2003a,
+  title = {Wrapper maintenance: A machine learning approach},
+  language = {English},
+  publisher = {American Association for Artificial Intelligence},
+  author = {Lerman, Kristina and Minton, Steven N. and Knoblock, Craig A.},
+  journal = {Journal of Artificial Intelligence Research},
+  volume = {18},
+  pages = {149-181},
+  year = {2003},
+  issn = {10769757, 19435037},
+  abstract = {The proliferation of online information sources has led to an increased use of wrappers for extracting data from Web sources. While most of the previous research has focused on quick and efficient generation of wrappers, the development of tools for wrapper maintenance has received less attention. This is an important research problem because Web sources often change in ways that prevent the wrappers from extracting data correctly. We present an efficient algorithm that learns structural information about data from positive examples alone. We describe how this information can be used for two wrapper maintenance applications: wrapper verification and reinduction. The wrapper verification system detects when a wrapper is not extracting correct data, usually because the Web source has changed its format. The reinduction algorithm automatically recovers from changes in the Web source by identifying data on Web pages so that a new wrapper may be generated for this source. To validate our approach, we monitored 27 wrappers over a period of a year. The verification algorithm correctly discovered 35 of the 37 wrapper changes, and made 16 mistakes, resulting in precision of 0.73 and recall of 0.95. We validated the reinduction algorithm on ten Web sources. We were able to successfully reinduce the wrappers, obtaining precision and recall values of 0.90 and 0.80 on the data extraction task. ©2003 AI Access Foundation and Morgan Kaufmann Publishers. All rights reserved.}
+}
+
 % vim:wrap linebreak nolist:
